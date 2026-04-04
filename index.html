@@ -4,90 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thailand Trip Planner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="background-decoration"></div>
+    
     <div class="container">
-        <header>
-            <h1>🇹🇭 Thailand Trip Planner</h1>
-            <p class="trip-dates">April 24 - April 29, 2026</p>
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="header-icon">🇹🇭</div>
+                <div>
+                    <h1>Thailand Adventure</h1>
+                    <p class="trip-tagline">Your Perfect Southeast Asia Journey</p>
+                </div>
+            </div>
+            <div class="trip-stats">
+                <div class="stat">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>6 Days</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Apr 24-29</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-luggage"></i>
+                    <span>Ready to Explore</span>
+                </div>
+            </div>
         </header>
 
-        <!-- Day Navigation -->
-        <section class="day-boxes">
-            <div class="day-box" data-day="1" onclick="selectDay(1)">
-                <div class="day-number">Day 1</div>
-                <div class="day-date">Apr 24</div>
-            </div>
-            <div class="day-box" data-day="2" onclick="selectDay(2)">
-                <div class="day-number">Day 2</div>
-                <div class="day-date">Apr 25</div>
-            </div>
-            <div class="day-box" data-day="3" onclick="selectDay(3)">
-                <div class="day-number">Day 3</div>
-                <div class="day-date">Apr 26</div>
-            </div>
-            <div class="day-box" data-day="4" onclick="selectDay(4)">
-                <div class="day-number">Day 4</div>
-                <div class="day-date">Apr 27</div>
-            </div>
-            <div class="day-box" data-day="5" onclick="selectDay(5)">
-                <div class="day-number">Day 5</div>
-                <div class="day-date">Apr 28</div>
-            </div>
-            <div class="day-box" data-day="6" onclick="selectDay(6)">
-                <div class="day-number">Day 6</div>
-                <div class="day-date">Apr 29</div>
+        <!-- Day Timeline -->
+        <section class="timeline-section">
+            <h2 class="section-title"><i class="fas fa-clock"></i> Your Journey</h2>
+            <div class="day-boxes">
+                <div class="day-box" data-day="1" onclick="selectDay(1)">
+                    <div class="day-icon">☀️</div>
+                    <div class="day-number">Day 1</div>
+                    <div class="day-date">Apr 24</div>
+                </div>
+                <div class="day-box" data-day="2" onclick="selectDay(2)">
+                    <div class="day-icon">🌤️</div>
+                    <div class="day-number">Day 2</div>
+                    <div class="day-date">Apr 25</div>
+                </div>
+                <div class="day-box" data-day="3" onclick="selectDay(3)">
+                    <div class="day-icon">☁️</div>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-date">Apr 26</div>
+                </div>
+                <div class="day-box" data-day="4" onclick="selectDay(4)">
+                    <div class="day-icon">🌴</div>
+                    <div class="day-number">Day 4</div>
+                    <div class="day-date">Apr 27</div>
+                </div>
+                <div class="day-box" data-day="5" onclick="selectDay(5)">
+                    <div class="day-icon">🌊</div>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-date">Apr 28</div>
+                </div>
+                <div class="day-box" data-day="6" onclick="selectDay(6)">
+                    <div class="day-icon">🌅</div>
+                    <div class="day-number">Day 6</div>
+                    <div class="day-date">Apr 29</div>
+                </div>
             </div>
         </section>
 
-        <!-- Day Content -->
-        <section class="day-content">
-            <div class="day-header">
-                <h2 id="day-title">Day 1 - April 24</h2>
-            </div>
+        <!-- Day Details -->
+        <section class="day-details">
+            <div class="details-wrapper">
+                <!-- Left Column: Activities -->
+                <div class="details-column activities-column">
+                    <div class="column-header">
+                        <i class="fas fa-list-check"></i>
+                        <h3 id="day-title">Day 1 Activities</h3>
+                    </div>
 
-            <div class="day-main">
-                <!-- Activities List -->
-                <div class="activities-section">
-                    <h3>To-Do / To-Go List</h3>
-                    <ul id="activities-list" class="activities-list">
-                        <li class="empty-message">No activities yet. Add one below!</li>
-                    </ul>
-                    <div class="add-activity">
-                        <input type="text" id="activity-input" placeholder="Add a new activity...">
-                        <button onclick="addActivity()">Add</button>
+                    <div class="activities-container">
+                        <ul id="activities-list" class="activities-list">
+                            <li class="empty-message">
+                                <i class="fas fa-inbox"></i>
+                                <p>No activities yet</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="add-activity-form">
+                        <div class="input-group">
+                            <input type="text" id="activity-input" placeholder="✏️ Add activity or place to visit..." autocomplete="off">
+                            <button class="btn-add" onclick="addActivity()" title="Add Activity">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Going Status -->
-                <div class="status-section">
-                    <h3>Trip Status</h3>
-                    <div class="going-toggle">
-                        <label class="toggle-label">
-                            <input type="checkbox" id="going-checkbox" onchange="toggleGoingStatus()" checked>
-                            <span class="toggle-text">Going on this day</span>
-                        </label>
+                <!-- Right Column: Status & Suggestions -->
+                <div class="details-column status-column">
+                    <div class="column-header">
+                        <i class="fas fa-compass"></i>
+                        <h3>Trip Status</h3>
                     </div>
 
-                    <!-- Suggestions (hidden by default) -->
-                    <div id="suggestions-container" class="suggestions-container" style="display: none;">
-                        <h4>Suggested Alternatives:</h4>
-                        <div class="suggestions-list" id="suggestions-list">
-                            <div class="suggestion" onclick="selectSuggestion('Spa Day at Local Resort')">
-                                <input type="radio" name="suggestion" value="1">
-                                <span>Spa Day at Local Resort</span>
+                    <div class="status-card">
+                        <div class="going-toggle-container">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="going-checkbox" onchange="toggleGoingStatus()" checked>
+                                <span class="toggle-track">
+                                    <span class="toggle-thumb"></span>
+                                </span>
+                                <span class="toggle-text">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span id="toggle-status">Going on this day</span>
+                                </span>
+                            </label>
+                        </div>
+
+                        <!-- Suggestions Card -->
+                        <div id="suggestions-container" class="suggestions-card" style="display: none;">
+                            <div class="suggestions-header">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>Alternative Ideas</h4>
                             </div>
-                            <div class="suggestion" onclick="selectSuggestion('Beach Relaxation')">
-                                <input type="radio" name="suggestion" value="2">
-                                <span>Beach Relaxation</span>
-                            </div>
-                            <div class="suggestion" onclick="selectSuggestion('Local Market Exploration')">
-                                <input type="radio" name="suggestion" value="3">
-                                <span>Local Market Exploration</span>
-                            </div>
+                            <div class="suggestions-list" id="suggestions-list"></div>
+                        </div>
+
+                        <!-- Going Status Badge -->
+                        <div id="status-badge" class="status-badge going">
+                            <i class="fas fa-circle"></i>
+                            <span>Ready to Go!</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section class="quick-stats">
+            <div class="stat-card">
+                <i class="fas fa-tasks"></i>
+                <div>
+                    <p class="stat-label">Total Activities</p>
+                    <p class="stat-value" id="total-activities">0</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-check"></i>
+                <div>
+                    <p class="stat-label">Days Going</p>
+                    <p class="stat-value" id="days-going">6</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-exclamation-circle"></i>
+                <div>
+                    <p class="stat-label">Days Skipping</p>
+                    <p class="stat-value" id="days-skipping">0</p>
                 </div>
             </div>
         </section>

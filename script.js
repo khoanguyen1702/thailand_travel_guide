@@ -10,26 +10,41 @@ const daysData = {
 
 let currentDay = 1;
 
-// Replacement suggestions
+// Replacement suggestions for Thailand travel
 const suggestionOptions = [
     'Spa Day at Local Resort',
-    'Beach Relaxation',
+    'Beach Relaxation at Sunset',
     'Local Market Exploration',
     'Thai Cooking Class',
-    'Temple Visit',
-    'Muay Thai Training',
-    'Island Hopping Tour',
-    'Night Market Adventure'
+    'Ancient Temple Visit',
+    'Muay Thai Training Session',
+    'Island Hopping Adventure',
+    'Night Bazaar Shopping Tour',
+    'Elephant Sanctuary Visit',
+    'Scuba Diving Expedition',
+    'Tuk-Tuk City Tour',
+    'Thai Massage & Wellness Day',
+    'Ziplining Through Jungle',
+    'Floating Market Tour',
+    'Street Food Tasting Tour'
 ];
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadDayData(1);
+    
+    // Event listener for activity input
     document.getElementById('activity-input').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             addActivity();
         }
     });
+
+    // Load saved data from localStorage if available
+    loadFromLocalStorage();
+    
+    // Update stats on load
+    updateStats();
 });
 
 // Select a day
@@ -46,16 +61,18 @@ function selectDay(day) {
     // Load new day
     currentDay = day;
     loadDayData(day);
+    
+    // Scroll to details section
+    document.querySelector('.day-details').scrollIntoView({ behavior: 'smooth' });
 }
 
 // Load day data into the UI
 function loadDayData(day) {
     const dayData = daysData[day];
-    const dayNumber = day;
-    const dayDate = dayData.date;
+    const dates = ['April 24', 'April 25', 'April 26', 'April 27', 'April 28', 'April 29'];
     
     // Update title
-    document.getElementById('day-title').textContent = `Day ${dayNumber} - ${dayDate}`;
+    document.getElementById('day-title').textContent = `Day ${day} Activities`;
     
     // Update activities list
     updateActivitiesList();
@@ -63,6 +80,7 @@ function loadDayData(day) {
     // Update going status
     document.getElementById('going-checkbox').checked = dayData.going;
     updateSuggestionsVisibility();
+    updateStatusBadge();
     
     // Set active day box
     document.querySelectorAll('.day-box').forEach(box => {
@@ -77,14 +95,24 @@ function updateActivitiesList() {
     const list = document.getElementById('activities-list');
     
     if (dayData.activities.length === 0) {
-        list.innerHTML = '<li class="empty-message">No activities yet. Add one below!</li>';
+        list.innerHTML = `
+            <li class="empty-message">
+                <i class="fas fa-inbox"></i>
+                <p>No activities yet</p>
+            </li>
+        `;
         return;
     }
     
     list.innerHTML = dayData.activities.map((activity, index) => `
         <li class="activity-item">
-            <span>${activity}</span>
-            <button class="delete-btn" onclick="deleteActivity(${index})">✕</button>
+            <span>
+                <i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i>
+                ${activity}
+            </span>
+            <button class="delete-btn" onclick="deleteActivity(${index})" title="Delete activity">
+                <i class="fas fa-trash"></i>
+            </button>
         </li>
     `).join('');
 }
@@ -95,19 +123,31 @@ function addActivity() {
     const activity = input.value.trim();
     
     if (activity === '') {
-        alert('Please enter an activity');
+        alert('❌ Please enter an activity or place to visit!');
+        return;
+    }
+    
+    if (activity.length > 100) {
+        alert('⚠️ Activity description is too long (max 100 characters)');
         return;
     }
     
     daysData[currentDay].activities.push(activity);
     input.value = '';
+    input.focus();
     updateActivitiesList();
+    updateStats();
+    saveToLocalStorage();
 }
 
 // Delete activity
 function deleteActivity(index) {
-    daysData[currentDay].activities.splice(index, 1);
-    updateActivitiesList();
+    if (confirm('Are you sure you want to delete this activity?')) {
+        daysData[currentDay].activities.splice(index, 1);
+        updateActivitiesList();
+        updateStats();
+        saveToLocalStorage();
+    }
 }
 
 // Toggle going status
@@ -115,6 +155,9 @@ function toggleGoingStatus() {
     const isChecked = document.getElementById('going-checkbox').checked;
     daysData[currentDay].going = isChecked;
     updateSuggestionsVisibility();
+    updateStatusBadge();
+    updateStats();
+    saveToLocalStorage();
 }
 
 // Update suggestions visibility based on going status
@@ -132,27 +175,78 @@ function updateSuggestionsVisibility() {
 
 // Generate random suggestions
 function generateSuggestions() {
-    // Get 3 random suggestions
-    const shuffled = suggestionOptions.sort(() => 0.5 - Math.random()).slice(0, 3);
+    // Shuffle and get 3 random suggestions
+    const shuffled = [...suggestionOptions].sort(() => 0.5 - Math.random()).slice(0, 3);
     const suggestionsList = document.getElementById('suggestions-list');
     
     suggestionsList.innerHTML = shuffled.map((suggestion, index) => `
-        <div class="suggestion" onclick="selectSuggestion('${suggestion}')">
+        <label class="suggestion">
             <input type="radio" name="suggestion" value="${index + 1}">
             <span>${suggestion}</span>
-        </div>
+        </label>
     `).join('');
 }
 
-// Select a suggestion (placeholder for future functionality)
-function selectSuggestion(suggestion) {
-    // This will be extended with more functionality later
-    console.log(`Selected suggestion: ${suggestion}`);
-    alert(`You selected: ${suggestion}\n\nThis will be replaced with "${document.getElementById('day-title').textContent}"`);
+// Update status badge
+function updateStatusBadge() {
+    const badge = document.getElementById('status-badge');
+    const statusSpan = document.getElementById('toggle-status');
+    const isGoing = document.getElementById('going-checkbox').checked;
+    
+    if (isGoing) {
+        badge.classList.remove('not-going');
+        badge.classList.add('going');
+        badge.innerHTML = '<i class="fas fa-circle"></i> <span>Ready to Go!</span>';
+        statusSpan.textContent = 'Going on this day';
+    } else {
+        badge.classList.remove('going');
+        badge.classList.add('not-going');
+        badge.innerHTML = '<i class="fas fa-times-circle"></i> <span>Looking for Alternatives</span>';
+        statusSpan.textContent = 'Skipping this day';
+    }
 }
 
-// Save day data (for future persistence)
-function saveDayData() {
-    // This can be extended to save to localStorage or backend
-    console.log(`Saved data for Day ${currentDay}:`, daysData[currentDay]);
+// Update quick stats
+function updateStats() {
+    // Total activities
+    let totalActivities = 0;
+    let daysGoing = 0;
+    let daysSkipping = 0;
+    
+    Object.keys(daysData).forEach(day => {
+        totalActivities += daysData[day].activities.length;
+        if (daysData[day].going) {
+            daysGoing++;
+        } else {
+            daysSkipping++;
+        }
+    });
+    
+    document.getElementById('total-activities').textContent = totalActivities;
+    document.getElementById('days-going').textContent = daysGoing;
+    document.getElementById('days-skipping').textContent = daysSkipping;
+}
+
+// Save day data to localStorage
+function saveToLocalStorage() {
+    try {
+        localStorage.setItem('thailand-trip-data', JSON.stringify(daysData));
+        console.log('Data saved to localStorage');
+    } catch (e) {
+        console.warn('Could not save to localStorage:', e);
+    }
+}
+
+// Load day data from localStorage
+function loadFromLocalStorage() {
+    try {
+        const saved = localStorage.getItem('thailand-trip-data');
+        if (saved) {
+            const loaded = JSON.parse(saved);
+            Object.assign(daysData, loaded);
+            console.log('Data loaded from localStorage');
+        }
+    } catch (e) {
+        console.warn('Could not load from localStorage:', e);
+    }
 }
