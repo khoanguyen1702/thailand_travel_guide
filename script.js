@@ -1,11 +1,11 @@
 // Day data storage
 const daysData = {
-    1: { date: 'April 24', activities: [], going: true },
-    2: { date: 'April 25', activities: [], going: true },
-    3: { date: 'April 26', activities: [], going: true },
-    4: { date: 'April 27', activities: [], going: true },
-    5: { date: 'April 28', activities: [], going: true },
-    6: { date: 'April 29', activities: [], going: true }
+    1: { date: 'April 24', time: '', activities: [], going: true },
+    2: { date: 'April 25', time: '', activities: [], going: true },
+    3: { date: 'April 26', time: '', activities: [], going: true },
+    4: { date: 'April 27', time: '', activities: [], going: true },
+    5: { date: 'April 28', time: '', activities: [], going: true },
+    6: { date: 'April 29', time: '', activities: [], going: true }
 };
 
 let currentDay = 1;
@@ -33,11 +33,16 @@ const suggestionOptions = [
 document.addEventListener('DOMContentLoaded', function() {
     loadDayData(1);
     
-    // Event listener for activity input
+    // Event listeners for input
     document.getElementById('activity-input').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             addActivity();
         }
+    });
+
+    document.getElementById('time-input').addEventListener('change', function() {
+        daysData[currentDay].time = this.value;
+        saveToLocalStorage();
     });
 
     // Load saved data from localStorage if available
@@ -53,26 +58,25 @@ function selectDay(day) {
     saveDayData();
     
     // Update active state
-    document.querySelectorAll('.day-box').forEach(box => {
-        box.classList.remove('active');
+    document.querySelectorAll('.day-nav-btn').forEach(btn => {
+        btn.classList.remove('active');
     });
-    document.querySelector(`[data-day="${day}"]`).classList.add('active');
+    document.querySelector(`[data-day="${day}"] .day-nav-btn`).classList.add('active');
     
     // Load new day
     currentDay = day;
     loadDayData(day);
-    
-    // Scroll to details section
-    document.querySelector('.day-details').scrollIntoView({ behavior: 'smooth' });
 }
 
 // Load day data into the UI
 function loadDayData(day) {
     const dayData = daysData[day];
-    const dates = ['April 24', 'April 25', 'April 26', 'April 27', 'April 28', 'April 29'];
     
     // Update title
-    document.getElementById('day-title').textContent = `Day ${day} Activities`;
+    document.getElementById('day-title').textContent = `Day ${day}`;
+    
+    // Update time input
+    document.getElementById('time-input').value = dayData.time || '';
     
     // Update activities list
     updateActivitiesList();
@@ -82,11 +86,11 @@ function loadDayData(day) {
     updateSuggestionsVisibility();
     updateStatusBadge();
     
-    // Set active day box
-    document.querySelectorAll('.day-box').forEach(box => {
-        box.classList.remove('active');
+    // Set active day button
+    document.querySelectorAll('.day-nav-btn').forEach(btn => {
+        btn.classList.remove('active');
     });
-    document.querySelector(`[data-day="${day}"]`).classList.add('active');
+    document.querySelector(`[data-day="${day}"] .day-nav-btn`).classList.add('active');
 }
 
 // Update the activities list display
@@ -98,7 +102,7 @@ function updateActivitiesList() {
         list.innerHTML = `
             <li class="empty-message">
                 <i class="fas fa-inbox"></i>
-                <p>No activities yet</p>
+                <p>No activities added yet</p>
             </li>
         `;
         return;
@@ -106,10 +110,7 @@ function updateActivitiesList() {
     
     list.innerHTML = dayData.activities.map((activity, index) => `
         <li class="activity-item">
-            <span>
-                <i class="fas fa-check-circle" style="color: var(--secondary); margin-right: 10px;"></i>
-                ${activity}
-            </span>
+            <span>📍 ${activity}</span>
             <button class="delete-btn" onclick="deleteActivity(${index})" title="Delete activity">
                 <i class="fas fa-trash"></i>
             </button>
@@ -123,12 +124,12 @@ function addActivity() {
     const activity = input.value.trim();
     
     if (activity === '') {
-        alert('❌ Please enter an activity or place to visit!');
+        alert('Please enter an activity or place to visit!');
         return;
     }
     
     if (activity.length > 100) {
-        alert('⚠️ Activity description is too long (max 100 characters)');
+        alert('Activity description is too long (max 100 characters)');
         return;
     }
     
@@ -190,19 +191,16 @@ function generateSuggestions() {
 // Update status badge
 function updateStatusBadge() {
     const badge = document.getElementById('status-badge');
-    const statusSpan = document.getElementById('toggle-status');
     const isGoing = document.getElementById('going-checkbox').checked;
     
     if (isGoing) {
         badge.classList.remove('not-going');
         badge.classList.add('going');
-        badge.innerHTML = '<i class="fas fa-circle"></i> <span>Ready to Go!</span>';
-        statusSpan.textContent = 'Going on this day';
+        badge.innerHTML = '✓ Ready to Go!';
     } else {
         badge.classList.remove('going');
         badge.classList.add('not-going');
-        badge.innerHTML = '<i class="fas fa-times-circle"></i> <span>Looking for Alternatives</span>';
-        statusSpan.textContent = 'Skipping this day';
+        badge.innerHTML = '✗ Looking for Alternatives';
     }
 }
 
