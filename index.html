@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thailand Trip Planner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇹🇭 Thailand Trip Planner</h1>
+            <p class="trip-dates">April 24 - April 29, 2026</p>
+        </header>
+
+        <!-- Day Navigation -->
+        <section class="day-boxes">
+            <div class="day-box" data-day="1" onclick="selectDay(1)">
+                <div class="day-number">Day 1</div>
+                <div class="day-date">Apr 24</div>
+            </div>
+            <div class="day-box" data-day="2" onclick="selectDay(2)">
+                <div class="day-number">Day 2</div>
+                <div class="day-date">Apr 25</div>
+            </div>
+            <div class="day-box" data-day="3" onclick="selectDay(3)">
+                <div class="day-number">Day 3</div>
+                <div class="day-date">Apr 26</div>
+            </div>
+            <div class="day-box" data-day="4" onclick="selectDay(4)">
+                <div class="day-number">Day 4</div>
+                <div class="day-date">Apr 27</div>
+            </div>
+            <div class="day-box" data-day="5" onclick="selectDay(5)">
+                <div class="day-number">Day 5</div>
+                <div class="day-date">Apr 28</div>
+            </div>
+            <div class="day-box" data-day="6" onclick="selectDay(6)">
+                <div class="day-number">Day 6</div>
+                <div class="day-date">Apr 29</div>
+            </div>
+        </section>
+
+        <!-- Day Content -->
+        <section class="day-content">
+            <div class="day-header">
+                <h2 id="day-title">Day 1 - April 24</h2>
+            </div>
+
+            <div class="day-main">
+                <!-- Activities List -->
+                <div class="activities-section">
+                    <h3>To-Do / To-Go List</h3>
+                    <ul id="activities-list" class="activities-list">
+                        <li class="empty-message">No activities yet. Add one below!</li>
+                    </ul>
+                    <div class="add-activity">
+                        <input type="text" id="activity-input" placeholder="Add a new activity...">
+                        <button onclick="addActivity()">Add</button>
+                    </div>
+                </div>
+
+                <!-- Going Status -->
+                <div class="status-section">
+                    <h3>Trip Status</h3>
+                    <div class="going-toggle">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="going-checkbox" onchange="toggleGoingStatus()" checked>
+                            <span class="toggle-text">Going on this day</span>
+                        </label>
+                    </div>
+
+                    <!-- Suggestions (hidden by default) -->
+                    <div id="suggestions-container" class="suggestions-container" style="display: none;">
+                        <h4>Suggested Alternatives:</h4>
+                        <div class="suggestions-list" id="suggestions-list">
+                            <div class="suggestion" onclick="selectSuggestion('Spa Day at Local Resort')">
+                                <input type="radio" name="suggestion" value="1">
+                                <span>Spa Day at Local Resort</span>
+                            </div>
+                            <div class="suggestion" onclick="selectSuggestion('Beach Relaxation')">
+                                <input type="radio" name="suggestion" value="2">
+                                <span>Beach Relaxation</span>
+                            </div>
+                            <div class="suggestion" onclick="selectSuggestion('Local Market Exploration')">
+                                <input type="radio" name="suggestion" value="3">
+                                <span>Local Market Exploration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
