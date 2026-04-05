@@ -67,7 +67,7 @@ const dayActivities = {
             time: '20:30',
             en_description: 'Check in at Blu 395',
             vi_description: 'Nhận phòng tại Blu 395',
-            link: 'https://share.google/7RoxcqXVEhLCGZogo',
+            link: 'https://www.google.com/maps/place/BLU+395/@13.7908157,100.5484516,17z/data=!3m1!4b1!4m9!3m8!1s0x30e29da1cfa7db83:0xd73d1d6fc229beb0!5m2!4m1!1i2!8m2!3d13.7908157!4d100.5484516!16s%2Fg%2F11fqxx0kcz?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D',
             hasAlternatives: false,
             alternatives: []
         },
@@ -75,18 +75,18 @@ const dayActivities = {
             time: '21:00',
             en_description: 'Going to Liabduan Danneramit Night Market',
             vi_description: 'Đi đến Chợ Đêm Liabduan Danneramit',
-            link: 'https://share.google/z7ujVzH2mBezwwrUA',
+            link: 'https://www.google.com/maps/place/Liabduan+Danneramit+Night+Market/data=!4m2!3m1!1s0x0:0x131b52caa9da76f7?sa=X&ved=1t:2428&ictx=111',
             hasAlternatives: true,
             alternatives: [
                 {
                     en_description: 'Eating Thai local grilled restaurant Laab Ubon Kontrakran',
                     vi_description: 'Ăn tại nhà hàng nướng địa phương Thái Lan Laab Ubon Kontrakran',
-                    link: 'https://share.google/YZKTDD6Y7jlGpcYPK'
+                    link: 'https://www.google.com/maps/place/Laab+Ubon+Kontrakran/@13.7184488,100.5200902,17z/data=!3m1!4b1!4m6!3m5!1s0x30e298cf373aabc5:0xba251c51515ca274!8m2!3d13.7184488!4d100.5200902!16s%2Fg%2F11bt_g_9qw?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D'
                 },
                 {
                     en_description: 'Eating seafood and grilled local restaurant Jaekoy',
                     vi_description: 'Ăn hải sản và nhà hàng nướng địa phương Jaekoy',
-                    link: 'https://share.google/ZlNy1PVntZTfc2TDV'
+                    link: 'https://www.google.com/maps/place/jaekoy/data=!4m2!3m1!1s0x30e29ecb374dcc41:0x36ad339bdcdce2e0?sa=X&ved=1t:242&ictx=111'
                 }
             ]
         },
