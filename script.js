@@ -357,23 +357,23 @@ function updatePaymentHistory() {
         return;
     }
     
-    let totalAmount = 0;
-    payments.forEach(p => totalAmount += p.amount);
+    let totalAmount = 0;\n    payments.forEach(p => {\n        totalAmount += (typeof p.amount === 'string' ? parseFloat(p.amount) : p.amount);\n    });
     
-    let html = '<div style="margin-top: 20px; border-top: 2px solid var(--sage-green); padding-top: 15px;"><h3 style="color: var(--dark-green); margin-bottom: 12px;">Payment History</h3>';
+    let html = '<div style="margin-top: 20px; border-top: 2px solid var(--sage-green); padding-top: 15px;"><h3 style="color: var(--dark-green); margin-bottom: 12px;">💳 Payment History</h3>';
     
     payments.forEach((payment, idx) => {
+        const amt = typeof payment.amount === 'string' ? parseFloat(payment.amount) : payment.amount;
         html += `
             <div style="background: var(--light-cream); padding: 10px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
                 <div style="flex: 1;">
-                    <strong>${payment.payer}</strong> - ${payment.amount.toLocaleString('vi-VN')} ₫ ÷ ${payment.users} = <span style="color: var(--coral);">${payment.perPerson.toLocaleString('vi-VN')} ₫</span>
+                    <strong>${payment.payer}</strong> - ${amt.toLocaleString('vi-VN')} ₫ ÷ ${payment.users} = <span style="color: var(--coral);">${(amt / payment.users).toFixed(0)} ₫</span>
                 </div>
                 <button onclick="deletePaymentEntry(${idx})" style="background: var(--coral); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Delete</button>
             </div>
         `;
     });
     
-    html += `<div style="background: var(--sage-green); color: white; padding: 12px; border-radius: 6px; margin-top: 12px; font-weight: 600; text-align: center;">Total: ${totalAmount.toLocaleString('vi-VN')} ₫</div>`;
+    html += `<div style="background: var(--sage-green); color: white; padding: 15px; border-radius: 6px; margin-top: 12px; font-weight: 600; text-align: center; font-size: 1.2rem;">💰 Total: ${totalAmount.toLocaleString('vi-VN')} ₫</div>`;
     html += '</div>';
     
     container.innerHTML = html;
