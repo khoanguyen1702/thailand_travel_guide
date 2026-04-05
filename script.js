@@ -307,21 +307,92 @@ function calculatePayment() {
 function openPaymentCalculator() {
     const modal = document.getElementById('payment-modal');
     modal.style.display = 'flex';
+    updatePaymentHistory();
 }
 
 function closePaymentCalculator() {
     const modal = document.getElementById('payment-modal');
     modal.style.display = 'none';
-    savePaymentData();
 }
 
-function savePaymentData() {
-    const payer = document.getElementById('payer-name').value;
-    const amount = document.getElementById('amount-paid').value;
-    const day = appData.currentDay;
+function addPaymentEntry() {
+    const payer = document.getElementById('payer-name').value.trim();
+    const amount = parseFloat(document.getElementById('amount-paid').value) || 0;
+    const users = parseInt(document.getElementById('total-users').value) || 1;
     
-    if (payer && amount) {
-        appData.paymentData[day] = { payer, amount, date: new Date().toLocaleString() };
+    if (!payer || amount === 0) {
+        alert('Please fill in payer name and amount');
+        return;
+    }
+    
+    const day = appData.currentDay;
+    if (!appData.paymentData[day]) {
+        appData.paymentData[day] = [];
+    }
+    
+    appData.paymentData[day].push({
+        payer: payer,
+        amount: amount,
+        users: users,
+        perPerson: (amount / users).toFixed(0),
+        timestamp: new Date().toLocaleString('vi-VN')
+    });
+    
+    // Clear inputs
+    document.getElementById('payer-name').value = '';
+    document.getElementById('amount-paid').value = '';
+    document.getElementById('total-users').value = '1';
+    
+    updatePaymentHistory();
+    saveAppData();
+}
+
+function updatePaymentHistory() {
+    const day = appData.currentDay;
+    const payments = appData.paymentData[day] || [];
+    const container = document.getElementById('payment-history');
+    
+    if (payments.length === 0) {
+        container.innerHTML = '';
+        return;
+    }
+    
+    let totalAmount = 0;
+    payments.forEach(p => totalAmount += p.amount);
+    
+    let html = '<div style="margin-top: 20px; border-top: 2px solid var(--sage-green); padding-top: 15px;"><h3 style="color: var(--dark-green); margin-bottom: 12px;">Payment History</h3>';
+    
+    payments.forEach((payment, idx) => {
+        html += `
+            <div style="background: var(--light-cream); padding: 10px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="flex: 1;">
+                    <strong>${payment.payer}</strong> - ${payment.amount.toLocaleString('vi-VN')} ₫ ÷ ${payment.users} = <span style="color: var(--coral);">${payment.perPerson.toLocaleString('vi-VN')} ₫</span>
+                </div>
+                <button onclick="deletePaymentEntry(${idx})" style="background: var(--coral); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Delete</button>
+            </div>
+        `;
+    });
+    
+    html += `<div style="background: var(--sage-green); color: white; padding: 12px; border-radius: 6px; margin-top: 12px; font-weight: 600; text-align: center;">Total: ${totalAmount.toLocaleString('vi-VN')} ₫</div>`;
+    html += '</div>';
+    
+    container.innerHTML = html;
+}
+
+function deletePaymentEntry(idx) {
+    const day = appData.currentDay;
+    if (appData.paymentData[day]) {
+        appData.paymentData[day].splice(idx, 1);
+        updatePaymentHistory();
+        saveAppData();
+    }
+}
+
+function clearAllPayments() {
+    if (confirm('Are you sure you want to clear all payments?')) {
+        const day = appData.currentDay;
+        appData.paymentData[day] = [];
+        updatePaymentHistory();
         saveAppData();
     }
 }

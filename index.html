@@ -107,6 +107,11 @@
                         </div>
                     </div>
 
+                    <div style="display: flex; gap: 10px; margin: 20px 0;">
+                        <button onclick="addPaymentEntry()" style="flex: 1; background: var(--sage-green); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600;">➕ Add Payment</button>
+                        <button onclick="clearAllPayments()" style="flex: 1; background: var(--coral); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600;">🗑️ Clear</button>
+                    </div>
+
                     <div class="payment-history" id="payment-history"></div>
                 </div>
             </div>
