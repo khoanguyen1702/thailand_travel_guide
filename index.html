@@ -3,167 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thailand Travel Itinerary</title>
+    <title>Thailand Trip</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="vi">Tiếng Việt</button>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
             <div class="header-decoration">
-                <div class="globe-icon">🌍</div>
-                <svg class="dotted-line" viewBox="0 0 300 100" preserveAspectRatio="none">
-                    <path d="M 10 50 Q 75 10 150 50 T 290 50" stroke="#d4845c" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-                </svg>
+                <div class="globe-icon">�🇭</div>
             </div>
             <div class="header-content">
-                <h1>Travel</h1>
-                <div class="ribbon">ITINERARY</div>
-                <p class="subtitle">Thailand Adventure 🇹🇭</p>
+                <h1 data-en="Thailand Trip" data-vi="Chuyến Du Lịch Thái Lan">Thailand Trip</h1>
+                <p class="subtitle" data-en="April 24 - 29, 2026" data-vi="24 - 29 Tháng Tư, 2026">April 24 - 29, 2026</p>
             </div>
         </header>
 
-        <!-- Trip Info Cards -->
-        <section class="trip-info">
-            <div class="info-card destination">
-                <label>Destination:</label>
-                <input type="text" value="Thailand" readonly>
-            </div>
-            <div class="info-card duration">
-                <label>Duration of Stay:</label>
-                <input type="text" value="6 Days" readonly>
-            </div>
-            <div class="info-card hotel">
-                <label>Dates:</label>
-                <input type="text" value="Apr 24 - 29, 2026" readonly>
+        <!-- Day Navigation -->
+        <section class="day-nav-section">
+            <div class="day-nav">
+                <div class="day-nav-item active" data-day="1" onclick="selectDay(1)">
+                    <button class="day-nav-btn day-1">
+                        <span class="day-num">1</span>
+                        <span class="day-label">DAY</span>
+                    </button>
+                    <span class="day-date">Apr 24</span>
+                </div>
+                <div class="day-nav-item" data-day="2" onclick="selectDay(2)">
+                    <button class="day-nav-btn day-2">
+                        <span class="day-num">2</span>
+                        <span class="day-label">DAY</span>
+                    </button>
+                    <span class="day-date">Apr 25</span>
+                </div>
+                <div class="day-nav-item" data-day="3" onclick="selectDay(3)">
+                    <button class="day-nav-btn day-3">
+                        <span class="day-num">3</span>
+                        <span class="day-label">DAY</span>
+                    </button>
+                    <span class="day-date">Apr 26</span>
+                </div>
+                <div class="day-nav-item" data-day="4" onclick="selectDay(4)">
+                    <button class="day-nav-btn day-4">
+                        <span class="day-num">4</span>
+                        <span class="day-label">DAY</span>
+                    </button>
+                    <span class="day-date">Apr 27</span>
+                </div>
+                <div class="day-nav-item" data-day="5" onclick="selectDay(5)">
+                    <button class="day-nav-btn day-5">
+                        <span class="day-num">5</span>
+                        <span class="day-label">DAY</span>
+                    </button>
+                    <span class="day-date">Apr 28</span>
+                </div>
+                <div class="day-nav-item" data-day="6" onclick="selectDay(6)">
+                    <button class="day-nav-btn day-6">
+                        <span class="day-num">6</span>
+                        <span class="day-label">DAY</span>
+                    </button>
+                    <span class="day-date">Apr 29</span>
+                </div>
             </div>
         </section>
-
-        <!-- Main Content -->
-        <section class="itinerary-section">
-            <div class="itinerary-wrapper">
-                <!-- Left Sidebar - Day Navigator -->
-                <aside class="day-navigator">
-                    <div class="day-nav-item" data-day="1" onclick="selectDay(1)">
-                        <button class="day-nav-btn day-1">
-                            <span class="day-num">1</span>
-                            <span class="day-label">DAY</span>
-                        </button>
-                        <span class="day-date">Apr 24</span>
-                    </div>
-                    <div class="day-nav-item" data-day="2" onclick="selectDay(2)">
-                        <button class="day-nav-btn day-2">
-                            <span class="day-num">2</span>
-                            <span class="day-label">DAY</span>
-                        </button>
-                        <span class="day-date">Apr 25</span>
-                    </div>
-                    <div class="day-nav-item" data-day="3" onclick="selectDay(3)">
-                        <button class="day-nav-btn day-3">
-                            <span class="day-num">3</span>
-                            <span class="day-label">DAY</span>
-                        </button>
-                        <span class="day-date">Apr 26</span>
-                    </div>
-                    <div class="day-nav-item" data-day="4" onclick="selectDay(4)">
-                        <button class="day-nav-btn day-4">
-                            <span class="day-num">4</span>
-                            <span class="day-label">DAY</span>
-                        </button>
-                        <span class="day-date">Apr 27</span>
-                    </div>
-                    <div class="day-nav-item" data-day="5" onclick="selectDay(5)">
-                        <button class="day-nav-btn day-5">
-                            <span class="day-num">5</span>
-                            <span class="day-label">DAY</span>
-                        </button>
-                        <span class="day-date">Apr 28</span>
-                    </div>
-                    <div class="day-nav-item" data-day="6" onclick="selectDay(6)">
-                        <button class="day-nav-btn day-6">
-                            <span class="day-num">6</span>
-                            <span class="day-label">DAY</span>
-                        </button>
-                        <span class="day-date">Apr 29</span>
-                    </div>
-                </aside>
-
-                <!-- Right Content Area -->
-                <main class="itinerary-content">
-                    <!-- Time Row -->
-                    <div class="itinerary-row">
-                        <div class="time-column">
-                            <label>⏰ Time:</label>
-                            <input type="text" id="time-input" placeholder="Enter time...">
-                        </div>
-                        <div class="activity-column">
-                            <label>📍 Activity:</label>
-                            <div class="activity-input-wrapper">
-                                <input type="text" id="activity-input" placeholder="What will you do?">
-                                <button class="btn-add" onclick="addActivity()" title="Add Activity">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Going Status -->
-                    <div class="going-status-row">
-                        <div class="status-box">
-                            <label class="status-toggle">
-                                <input type="checkbox" id="going-checkbox" onchange="toggleGoingStatus()" checked>
-                                <span class="checkmark"></span>
-                                <span id="status-text">Going on this day</span>
-                            </label>
-                        </div>
-                        <div class="status-badge" id="status-badge">
-                            ✓ Ready to Go!
-                        </div>
-                    </div>
-
-                    <!-- Activities List -->
-                    <div class="activities-section">
-                        <h3>📋 Activities for <span id="day-title">Day 1</span></h3>
-                        <ul id="activities-list" class="activities-list">
-                            <li class="empty-message">
-                                <i class="fas fa-inbox"></i>
-                                <p>No activities added yet</p>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Suggestions -->
-                    <div id="suggestions-container" class="suggestions-container" style="display: none;">
-                        <h3>💡 Alternative Ideas</h3>
-                        <div id="suggestions-list" class="suggestions-list"></div>
-                    </div>
-                </main>
+        <!-- Day Content -->
+        <section class="day-content">
+            <div class="day-header">
+                <h2 id="current-day-title" data-en="Day 1 - April 24" data-vi="Ngày 1 - 24 Tháng Tư">Day 1 - April 24</h2>
+                <button class="btn-payment" onclick="openPaymentCalculator()" data-en="💰 Payment Calculator" data-vi="💰 Tính Toán Chi Phí">💰 Payment Calculator</button>
             </div>
-        </section>
 
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="stat-box">
-                <i class="fas fa-tasks"></i>
-                <div class="stat-content">
-                    <span class="stat-label">Total Activities</span>
-                    <span class="stat-value" id="total-activities">0</span>
+            <!-- Payment Calculator Modal -->
+            <div id="payment-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closePaymentCalculator()">&times;</span>
+                    <h2 data-en="Payment Calculator" data-vi="Tính Toán Chi Phí">Payment Calculator</h2>
+                    
+                    <div class="payment-inputs">
+                        <div class="input-group">
+                            <label data-en="Payer Name:" data-vi="Tên Người Chi Tiền:">Payer Name:</label>
+                            <input type="text" id="payer-name" placeholder="Enter name">
+                        </div>
+                        <div class="input-group">
+                            <label data-en="Amount Paid:" data-vi="Số Tiền Đã Chi:">Amount Paid:</label>
+                            <input type="number" id="amount-paid" placeholder="0" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label data-en="Total Users:" data-vi="Tổng Số Người:">Total Users:</label>
+                            <input type="number" id="total-users" placeholder="0" min="1" value="1">
+                        </div>
+                    </div>
+
+                    <div class="payment-results">
+                        <div class="result-row">
+                            <span data-en="Per Person:" data-vi="Trên Mỗi Người:">Per Person:</span>
+                            <span id="per-person">0 ₫</span>
+                        </div>
+                        <div class="result-row">
+                            <span data-en="For 2 People:" data-vi="Cho 2 Người:">For 2 People:</span>
+                            <span id="for-two">0 ₫</span>
+                        </div>
+                    </div>
+
+                    <div class="payment-history" id="payment-history"></div>
                 </div>
             </div>
-            <div class="stat-box">
-                <i class="fas fa-check-circle"></i>
-                <div class="stat-content">
-                    <span class="stat-label">Days Going</span>
-                    <span class="stat-value" id="days-going">6</span>
-                </div>
-            </div>
-            <div class="stat-box">
-                <i class="fas fa-times-circle"></i>
-                <div class="stat-content">
-                    <span class="stat-label">Days Skipping</span>
-                    <span class="stat-value" id="days-skipping">0</span>
-                </div>
+
+            <!-- Activities Content -->
+            <div class="activities-content" id="activities-content">
+                <!-- Will be populated by JavaScript -->
             </div>
         </section>
     </div>
