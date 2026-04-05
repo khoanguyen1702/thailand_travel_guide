@@ -357,7 +357,10 @@ function updatePaymentHistory() {
         return;
     }
     
-    let totalAmount = 0;\n    payments.forEach(p => {\n        totalAmount += (typeof p.amount === 'string' ? parseFloat(p.amount) : p.amount);\n    });
+    let totalAmount = 0;
+    payments.forEach(p => {
+        totalAmount += (typeof p.amount === 'string' ? parseFloat(p.amount) : p.amount);
+    });
     
     let html = '<div style="margin-top: 20px; border-top: 2px solid var(--sage-green); padding-top: 15px;"><h3 style="color: var(--dark-green); margin-bottom: 12px;">💳 Payment History</h3>';
     
