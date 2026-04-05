@@ -18,7 +18,14 @@
         <!-- Header -->
         <header class="header">
             <div class="header-decoration">
-                <div class="globe-icon">�🇭</div>
+                <div class="plane-animation">
+                    <span class="plane">✈️</span>
+                </div>
+            </div>
+            <div class="thai-symbols">
+                <span>🇹🇭</span>
+                <span>🐘</span>
+                <span>🙏</span>
             </div>
             <div class="header-content">
                 <h1 data-en="Thailand Trip" data-vi="Chuyến Du Lịch Thái Lan">Thailand Trip</h1>
@@ -110,6 +117,11 @@
                             <span data-en="For 2 People:" data-vi="Cho 2 Người:">For 2 People:</span>
                             <span id="for-two">0 ₫</span>
                         </div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin: 20px 0;">
+                        <button onclick="addPaymentEntry()" style="flex: 1; background: var(--sage-green); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600;">➕ Add Payment</button>
+                        <button onclick="clearAllPayments()" style="flex: 1; background: var(--coral); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600;">🗑️ Clear</button>
                     </div>
 
                     <div class="payment-history" id="payment-history"></div>
