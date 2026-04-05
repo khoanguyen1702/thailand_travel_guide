@@ -15,10 +15,7 @@ const translations = {
         'Amount Paid:': 'Amount Paid:',
         'Total Users:': 'Total Users:',
         'Per Person:': 'Per Person:',
-        'For 2 People:': 'For 2 People:',
-        'Add Payment': 'Add Payment',
-        'Clear': 'Clear',
-        'Payment History': 'Payment History'
+        'For 2 People:': 'For 2 People:'
     },
     vi: {
         'Thailand Trip': 'Chuyến Du Lịch Thái Lan',
@@ -35,18 +32,7 @@ const translations = {
         'Amount Paid:': 'Số Tiền Đã Chi:',
         'Total Users:': 'Tổng Số Người:',
         'Per Person:': 'Trên Mỗi Người:',
-        'For 2 People:': 'Cho 2 Người:',
-        'Add Payment': 'Thêm Chi Phí',
-        'Clear': 'Xóa',
-        'Payment History': 'Lịch Sử Chi Phí',
-        'Meet up with everyone at Tan San Nhat Airport': 'Gặp mặt mọi người ở Sân Bay Tân Sơn Nhất',
-        'Welcome to BKK, Have quick dinner in Magic FoodCourt': 'Chào mừng đến Bangkok, Ăn tối nhanh tại Khu Ẩm Thực Magic',
-        'Start getting on train to get to Bangkok': 'Bắt đầu lên tàu để đến Bangkok',
-        'Check in at Blu 395': 'Nhận phòng tại Blu 395',
-        'Going to Liabduan Danneramit Night Market': 'Đi đến Chợ Đêm Liabduan Danneramit',
-        'Eating Thai local grilled restaurant Laab Ubon Kontrakran': 'Ăn tại nhà hàng nướng địa phương Thái Lan Laab Ubon Kontrakran',
-        'Eating seafood and grilled local restaurant Jaekoy': 'Ăn hải sản và nhà hàng nướng địa phương Jaekoy',
-        'Going back to hotel to rest for Day 2': 'Quay lại khách sạn để nghỉ ngơi cho Ngày 2'
+        'For 2 People:': 'Cho 2 Người:'
     }
 };
 
@@ -81,7 +67,7 @@ const dayActivities = {
             time: '20:30',
             en_description: 'Check in at Blu 395',
             vi_description: 'Nhận phòng tại Blu 395',
-            link: 'https://www.google.com/maps/place/BLU+395/@13.7908157,100.5484516,17z/data=!3m1!4b1!4m9!3m8!1s0x30e29da1cfa7db83:0xd73d1d6fc229beb0!5m2!4m1!1i2!8m2!3d13.7908157!4d100.5484516!16s%2Fg%2F11fqxx0kcz?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D',
+            link: 'https://share.google/7RoxcqXVEhLCGZogo',
             hasAlternatives: false,
             alternatives: []
         },
@@ -89,18 +75,18 @@ const dayActivities = {
             time: '21:00',
             en_description: 'Going to Liabduan Danneramit Night Market',
             vi_description: 'Đi đến Chợ Đêm Liabduan Danneramit',
-            link: 'https://www.google.com/maps/place/Liabduan+Danneramit+Night+Market/data=!4m2!3m1!1s0x0:0x131b52caa9da76f7?sa=X&ved=1t:2428&ictx=111',
+            link: 'https://share.google/z7ujVzH2mBezwwrUA',
             hasAlternatives: true,
             alternatives: [
                 {
                     en_description: 'Eating Thai local grilled restaurant Laab Ubon Kontrakran',
                     vi_description: 'Ăn tại nhà hàng nướng địa phương Thái Lan Laab Ubon Kontrakran',
-                    link: 'https://www.google.com/maps/place/Laab+Ubon+Kontrakran/@13.7184488,100.5200902,17z/data=!3m1!4b1!4m6!3m5!1s0x30e298cf373aabc5:0xba251c51515ca274!8m2!3d13.7184488!4d100.5200902!16s%2Fg%2F11bt_g_9qw?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D'
+                    link: 'https://share.google/YZKTDD6Y7jlGpcYPK'
                 },
                 {
                     en_description: 'Eating seafood and grilled local restaurant Jaekoy',
                     vi_description: 'Ăn hải sản và nhà hàng nướng địa phương Jaekoy',
-                    link: 'https://www.google.com/maps/place/jaekoy/data=!4m2!3m1!1s0x30e29ecb374dcc41:0x36ad339bdcdce2e0?sa=X&ved=1t:242&ictx=111'
+                    link: 'https://share.google/ZlNy1PVntZTfc2TDV'
                 }
             ]
         },
@@ -125,8 +111,7 @@ const appData = {
     currentLang: 'en',
     currentDay: 1,
     activityStatus: {},
-    paymentData: {},
-    paymentHistory: []
+    paymentData: {}
 };
 
 // Initialize
@@ -162,6 +147,10 @@ function changeLanguage(lang) {
     
     // Update all translatable elements
     updatePageContent();
+    
+    // Re-render activities with new language
+    updateActivityDisplay();
+    
     saveAppData();
 }
 
@@ -315,104 +304,24 @@ function calculatePayment() {
     document.getElementById('for-two').textContent = forTwo + ' ₫';
 }
 
-function addPaymentEntry() {
-    const payer = document.getElementById('payer-name').value.trim();
-    const amount = parseFloat(document.getElementById('amount-paid').value) || 0;
-    const users = parseInt(document.getElementById('total-users').value) || 1;
-    
-    if (!payer || amount === 0) {
-        alert('Please fill in all fields');
-        return;
-    }
-    
-    const day = appData.currentDay;
-    if (!appData.paymentHistory[day]) {
-        appData.paymentHistory[day] = [];
-    }
-    
-    appData.paymentHistory[day].push({
-        payer: payer,
-        amount: amount,
-        users: users,
-        perPerson: (amount / users).toFixed(2),
-        timestamp: new Date().toLocaleString('vi-VN')
-    });
-    
-    // Clear inputs
-    document.getElementById('payer-name').value = '';
-    document.getElementById('amount-paid').value = '';
-    document.getElementById('total-users').value = '1';
-    calculatePayment();
-    
-    updatePaymentHistory();
-    saveAppData();
-}
-
-function updatePaymentHistory() {
-    const day = appData.currentDay;
-    const history = appData.paymentHistory[day] || [];
-    const historyContainer = document.getElementById('payment-history');
-    
-    if (history.length === 0) {
-        historyContainer.innerHTML = '';
-        return;
-    }
-    
-    let totalAmount = 0;
-    let historyHTML = '<div style="margin-top: 20px;"><h3 style="color: var(--dark-green); margin-bottom: 15px;">Payment History:</h3>';
-    
-    history.forEach((entry, idx) => {
-        totalAmount += entry.amount;
-        historyHTML += `
-            <div style="background: var(--light-cream); padding: 12px; border-radius: 6px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <strong>${entry.payer}</strong> - ${entry.amount.toLocaleString('vi-VN')} ₫ (${entry.users} people)
-                    <br><small style="color: var(--light-text);">Per person: ${parseFloat(entry.perPerson).toLocaleString('vi-VN')} ₫</small>
-                </div>
-                <button onclick="deletePaymentEntry(${idx})" style="background: var(--coral); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Delete</button>
-            </div>
-        `;
-    });
-    
-    historyHTML += `
-        <div style="background: var(--sage-green); color: white; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; font-weight: bold;">
-            Total Amount: ${totalAmount.toLocaleString('vi-VN')} ₫
-        </div>
-    </div>`;
-    
-    historyContainer.innerHTML = historyHTML;
-}
-
-function deletePaymentEntry(idx) {
-    const day = appData.currentDay;
-    if (appData.paymentHistory[day]) {
-        appData.paymentHistory[day].splice(idx, 1);
-        updatePaymentHistory();
-        saveAppData();
-    }
-}
-
 function openPaymentCalculator() {
     const modal = document.getElementById('payment-modal');
     modal.style.display = 'flex';
-    updatePaymentHistory();
 }
 
 function closePaymentCalculator() {
     const modal = document.getElementById('payment-modal');
     modal.style.display = 'none';
-    saveAppData();
+    savePaymentData();
 }
 
-function clearAllPayments() {
+function savePaymentData() {
+    const payer = document.getElementById('payer-name').value;
+    const amount = document.getElementById('amount-paid').value;
     const day = appData.currentDay;
-    if (confirm('Are you sure you want to clear all payments for this day?')) {
-        appData.paymentHistory[day] = [];
-        document.getElementById('payer-name').value = '';
-        document.getElementById('amount-paid').value = '';
-        document.getElementById('total-users').value = '1';
-        calculatePayment();
-        updatePaymentHistory();
+    
+    if (payer && amount) {
+        appData.paymentData[day] = { payer, amount, date: new Date().toLocaleString() };
         saveAppData();
     }
 }
