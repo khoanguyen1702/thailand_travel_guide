@@ -61,32 +61,39 @@ body::before {
     right: 20px;
     z-index: 1000;
     display: flex;
-    gap: 10px;
-    background: white;
-    padding: 10px;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
 }
 
 .lang-btn {
     background: none;
-    border: 2px solid var(--light-text);
-    padding: 8px 16px;
-    border-radius: 20px;
+    border: none;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s;
-    font-weight: 600;
-    color: var(--light-text);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+}
+
+.lang-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 .lang-btn.active {
     background: var(--coral);
-    border-color: var(--coral);
-    color: white;
-}
-
-.lang-btn:hover {
-    transform: scale(1.05);
+    opacity: 1;
+    box-shadow: 0 2px 8px rgba(217, 120, 96, 0.3);
 }
 
 /* Header */
