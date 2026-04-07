@@ -40,7 +40,7 @@ const translations = {
 const dayActivities = {
     1: [
         {
-            time: '15:00 / 3PM',
+            time: '15:00',
             en_description: 'Meet up with everyone at Tan San Nhat Airport',
             vi_description: 'Gặp mặt mọi người ở Sân Bay Tân Sơn Nhất',
             link: null,
@@ -48,7 +48,7 @@ const dayActivities = {
             alternatives: []
         },
         {
-            time: '19:00 / 7PM',
+            time: '19:00',
             en_description: 'Welcome to BKK, Have quick dinner in Magic FoodCourt',
             vi_description: 'Chào mừng đến Bangkok, Ăn tối nhanh tại Khu Ẩm Thực Magic',
             link: 'https://share.google/3PNgyjdygDUJ7nall',
@@ -99,7 +99,84 @@ const dayActivities = {
             alternatives: []
         }
     ],
-    2: [],
+    2: [
+        {
+            time: '08:30-09:30',
+            en_description: 'Breakfast Boat Noodle at Baan Kuay Tiew RuaThong',
+            vi_description: 'Ăn sáng Boat Noodle tại Baan Kuay Tiew RuaThong',
+            link: 'https://www.google.com/maps/place/Baan+Kuay+Tiew+Ruathong/@13.7655561,100.5388748,19.47z/data=!4m15!1m8!3m7!1s0x30e29eb6cc00645f:0x81e066196de1388b!2sVictory+Monument+BTS+Station,+Phaya+Thai+Rd,+Khet+Ratchathewi,+Krung+Thep+Maha+Nakhon+10400,+Thailand!3b1!8m2!3d13.7626455!4d100.5369506!16s%2Fg%2F1ynnq4sly!3m5!1s0x30e29eb0601aa3e3:0x8c31c0b08db10262!8m2!3d13.7657518!4d100.5394974!16s%2Fg%2F1vkxjqgg?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '10:30-12:00',
+            en_description: 'Central World - Grab 7 Sun Matcha and Explore Central World',
+            vi_description: 'Central World - Grab 7 Sun Matcha và Khám Phá Central World',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '12:00',
+            en_description: 'Chula 50 Kitchen - Get queue number, explore nearby area until called',
+            vi_description: 'Chula 50 Kitchen - Lấy số xếp hàng, khám phá khu vực gần đó cho đến khi được gọi',
+            link: 'https://www.google.com/maps/place/Patpong+Night+Market/@13.7476977,100.5276271,14.74z/data=!4m6!3m5!1s0x30e29f2b7bafd625:0x1f35cde2f40ba657!8m2!3d13.7292485!4d100.531574!16s%2Fg%2F12hrm8nl_?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D',
+            hasAlternatives: true,
+            alternatives: [
+                {
+                    en_description: 'Go wherever you want instead of heading back to rest',
+                    vi_description: 'Đi bất cứ đâu bạn muốn thay vì quay lại khách sạn để nghỉ',
+                    link: null
+                }
+            ]
+        },
+        {
+            time: '13:30',
+            en_description: 'Heading back to hotel to rest and regroup at 15:30',
+            vi_description: 'Quay lại khách sạn để nghỉ ngơi và tập trung lại lúc 15:30',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '15:30',
+            en_description: 'Sathorn Pier - Chaopraya River sightseeing. Go to red ticket booth, buy นั่งเรือชมวิว choose blue flag boat, sit on the left side',
+            vi_description: 'Sathorn Pier - Ngắm cảnh sông Chaopraya. Đi đến quầy vé đỏ, mua นั่งเรือชมวิว chọn thuyền cờ xanh, ngồi bên trái',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '17:00',
+            en_description: 'Icon Siam Pier - Visit PopMart Biggest store in the world. Eating at Icon Siam Foodcourt',
+            vi_description: 'Icon Siam Pier - Thăm PopMart cửa hàng lớn nhất thế giới. Ăn tại Icon Siam Foodcourt',
+            link: 'https://www.google.com/maps/place/ICONSIAM/@13.7264866,100.5050761,17z/data=!3m1!4b1!4m6!3m5!1s0x30e299cd81f01815:0x1660bd86761a92f4!8m2!3d13.7264814!4d100.509947!16s%2Fg%2F11gr60lh1v?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '19:30',
+            en_description: 'Siam Paragon via Golden Line - Visit Nextopia & Me Land. Try the 9\' banana here too',
+            vi_description: 'Siam Paragon qua Golden Line - Thăm Nextopia & Me Land. Thử chuối 9\' ở đây',
+            link: 'https://www.google.com/maps/place/Siam+Paragon/@13.7276029,100.5020338,16z/data=!4m10!1m2!2m1!1ssiam+paragon!3m6!1s0x30e29ecde3aee521:0x9f43939a2caf2963!8m2!3d13.7461302!4d100.5347792!15sCgxzaWFtIHBhcmFnb25aDiIMc2lhbSBwYXJhZ29ukgEPc2hvcHBpbmdfY2VudGVy4AEA!16zL20vMDltbWho?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '21:00',
+            en_description: 'Siam Square - Explore walking street with multiple malls and activities, live music bands',
+            vi_description: 'Siam Square - Khám phá phố đi bộ với nhiều trung tâm thương mại và hoạt động, các ban nhạc sống',
+            link: 'https://www.google.com/maps/place/Siam+Square/@13.7446396,100.530533,18z/data=!4m10!1m2!2m1!1ssiam+square!3m6!1s0x30e29f2a0551e5f9:0xa8864ee239de9339!8m2!3d13.7446395!4d100.5329147!15sCgtzaWFtIHNxdWFyZVoNIgtzaWFtIHNxdWFyZZIBD3Nob3BwaW5nX2NlbnRlcuABAA!16zL20vMDg4dnF6?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '22:00',
+            en_description: 'Heading back to hotel to rest for Day 3',
+            vi_description: 'Quay lại khách sạn để nghỉ ngơi cho Ngày 3',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
     3: [],
     4: [],
     5: [],
