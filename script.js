@@ -177,6 +177,8 @@ const dayActivities = {
             link: null,
             hasAlternatives: false,
             alternatives: []
+        }
+    ],
     3: [],
     4: [],
     5: [],
