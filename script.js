@@ -284,7 +284,32 @@ const dayActivities = {
             alternatives: []
         }
     ],
-    4: [],
+    4: [
+        {
+            time: '07:30',
+            en_description: 'Get to Bang Sue Junction Station to take train to Ayutthaya. Train departs at 08:45, arrives at Ayutthaya Station in ~45 minutes',
+            vi_description: 'Đến Bang Sue Junction Station để lên tàu đi Ayutthaya. Tàu khởi hành lúc 08:45, tới Ayutthaya Station trong ~45 phút',
+            link: 'https://maps.app.goo.gl/cbsemE587sMuTZzj6',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '10:00',
+            en_description: 'Rent Motorbike at the station. Remember to refill gas and return bike before 18:00',
+            vi_description: 'Thuê Xe Máy tại trạm. Nhớ đổ xăng và trả xe trước 18:00',
+            link: 'https://maps.app.goo.gl/bRzFrERm6gGiVJfc6',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '10:20',
+            en_description: 'Head to Panids restaurant',
+            vi_description: 'Đi đến nhà hàng Panids',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        }
+    ],
     5: [],
     6: []
 };
