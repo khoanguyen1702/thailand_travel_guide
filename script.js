@@ -429,6 +429,40 @@ function createActivityCard(activity, day, index) {
     const activeGoing = status.going ? 'active' : '';
     const activeNotGoing = !status.going ? 'active' : '';
     
+    // Special dropdown layout for Day 3, 18:00 China Town activity
+    if (day === 3 && activity.time === '18:00' && activity.alternatives.length > 0) {
+        const isDropdownOpen = status.dropdownOpen || false;
+        const alternativesHTML = `
+            <div class="dropdown-list">
+                ${activity.alternatives.map((alt, altIndex) => {
+                    const altDesc = lang === 'en' ? alt.en_description : alt.vi_description;
+                    return `
+                        <div class="dropdown-item">
+                            ${altDesc}
+                            ${alt.link ? `<br><a href="${alt.link}" target="_blank" class="alternative-link">🔗 View</a>` : ''}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+        
+        return `
+            <div class="activity-card">
+                <div class="activity-info">
+                    <div class="activity-time">${activity.time}</div>
+                    <div class="activity-description">${description}</div>
+                    ${activity.link ? `<a href="${activity.link}" target="_blank" class="activity-link">🔗 View Location</a>` : ''}
+                </div>
+                <div class="activity-status">
+                    <button class="btn-dropdown" onclick="toggleDropdown(${day}, ${index})" title="Show eating options">
+                        ▼ Menu
+                    </button>
+                </div>
+                ${isDropdownOpen ? alternativesHTML : ''}
+            </div>
+        `;
+    }
+    
     let alternativesHTML = '';
     if (!status.going && activity.hasAlternatives) {
         alternativesHTML = `
@@ -475,6 +509,16 @@ function setActivityStatus(day, index, going) {
         appData.activityStatus[keyId] = {};
     }
     appData.activityStatus[keyId].going = going;
+    updateActivityDisplay();
+    saveAppData();
+}
+
+function toggleDropdown(day, index) {
+    const keyId = `${day}-${index}`;
+    if (!appData.activityStatus[keyId]) {
+        appData.activityStatus[keyId] = {};
+    }
+    appData.activityStatus[keyId].dropdownOpen = !appData.activityStatus[keyId].dropdownOpen;
     updateActivityDisplay();
     saveAppData();
 }
