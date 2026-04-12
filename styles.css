@@ -170,9 +170,10 @@ body::before {
     font-weight: bold;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     transition: all 0.3s;
     position: relative;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
@@ -199,8 +200,9 @@ body::before {
 .day-label {
     font-size: 0.7rem;
     letter-spacing: 1.5px;
-    margin-top: 4px;
     text-transform: uppercase;
+    color: black;
+    order: -1;
 }
 
 .day-date {
