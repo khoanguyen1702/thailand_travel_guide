@@ -179,7 +179,79 @@ const dayActivities = {
             alternatives: []
         }
     ],
-    3: [],
+    3: [
+        {
+            time: '08:30-09:30',
+            en_description: 'Breakfast at Rung Rueang Pork Noodles',
+            vi_description: 'Ăn sáng tại Rung Rueang Pork Noodles',
+            link: 'https://maps.app.goo.gl/n1zoyHzYAxRVXchq7',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '10:00-10:30',
+            en_description: 'Take pictures at Wat Arun Viewing Point',
+            vi_description: 'Chụp ảnh tại Wat Arun Viewing Point',
+            link: 'https://maps.app.goo.gl/XUHZj6jzZaotpPpS9',
+            hasAlternatives: true,
+            alternatives: [
+                {
+                    en_description: 'If too hot, go to Terminal 21 Mall for exploration and eat at foodcourt',
+                    vi_description: 'Nếu quá nóng, đi đến Terminal 21 Mall để khám phá và ăn tại foodcourt',
+                    link: 'https://maps.app.goo.gl/qQnL1gFQQErWWVt3A'
+                },
+                {
+                    en_description: 'Another option: Visit MBK Center for cheap clothing and eat at Nak La Mookata',
+                    vi_description: 'Lựa chọn khác: Thăm MBK Center để mua quần áo rẻ và ăn tại Nak La Mookata',
+                    link: 'https://maps.app.goo.gl/TZaVDxSDXhQxZg9b7'
+                }
+            ]
+        },
+        {
+            time: '12:30-13:00',
+            en_description: 'Go back to hotel to rest and gather at 15:00',
+            vi_description: 'Quay lại khách sạn để nghỉ ngơi và tập trung lại lúc 15:00',
+            link: null,
+            hasAlternatives: true,
+            alternatives: [
+                {
+                    en_description: 'Or you can go anywhere you want instead',
+                    vi_description: 'Hoặc bạn có thể đi bất cứ đâu bạn muốn',
+                    link: null
+                }
+            ]
+        },
+        {
+            time: '15:00',
+            en_description: 'Start exploring Talad Noi (Old Town)',
+            vi_description: 'Bắt đầu khám phá Talad Noi (Thị trấn Cũ)',
+            link: 'https://maps.app.goo.gl/XkyW9VxHYywb63CM6',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '16:30',
+            en_description: 'Move to Song Wat Street Art',
+            vi_description: 'Di chuyển đến Song Wat Street Art',
+            link: 'https://maps.app.goo.gl/5gdkLsDKDiJBbtMu5',
+            hasAlternatives: true,
+            alternatives: [
+                {
+                    en_description: 'Alternative: Book TukTuk to watch Wat Arun at sunset (if didn\'t go in the morning because it was too hot)',
+                    vi_description: 'Lựa chọn khác: Đặt TukTuk để ngắm Wat Arun lúc hoàng hôn (nếu không đi vào sáng vì quá nóng)',
+                    link: 'https://maps.app.goo.gl/XUHZj6jzZaotpPpS9'
+                }
+            ]
+        },
+        {
+            time: '18:00',
+            en_description: 'Heading to China Town',
+            vi_description: 'Đi đến China Town',
+            link: 'https://maps.app.goo.gl/npffHayud8rwgF1EA',
+            hasAlternatives: false,
+            alternatives: []
+        }
+    ],
     4: [],
     5: [],
     6: []
