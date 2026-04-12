@@ -245,9 +245,41 @@ const dayActivities = {
         },
         {
             time: '18:00',
-            en_description: 'Heading to China Town',
-            vi_description: 'Đi đến China Town',
+            en_description: 'Heading to China Town - Eating options: Guay Jub Ouan Pochana (rolling noodle Kway Chap), Traditional Fish Soup, Grill Squid Spicy Sauce, or anything you want',
+            vi_description: 'Đi đến China Town - Lựa chọn ăn uống: Guay Jub Ouan Pochana (mì cuộn Kway Chap), Canh Cá Truyền Thống, Mực Nướng Nước Sốt Cay, hoặc bất cứ thứ gì bạn muốn',
             link: 'https://maps.app.goo.gl/npffHayud8rwgF1EA',
+            hasAlternatives: true,
+            alternatives: [
+                {
+                    en_description: 'Guay Jub Ouan Pochana - Rolling noodle Kway Chap',
+                    vi_description: 'Guay Jub Ouan Pochana - Mì cuộn Kway Chap',
+                    link: 'https://maps.app.goo.gl/DhJjPVrtRxvkjhto7'
+                },
+                {
+                    en_description: 'Traditional Fish Soup',
+                    vi_description: 'Canh Cá Truyền Thống',
+                    link: 'https://maps.app.goo.gl/hsqjpFkwbt5oFb329'
+                },
+                {
+                    en_description: 'Grill Squid Spicy Sauce',
+                    vi_description: 'Mực Nướng Nước Sốt Cay',
+                    link: 'https://maps.app.goo.gl/UXK21msxVz3qta5a8'
+                }
+            ]
+        },
+        {
+            time: '19:30-20:00',
+            en_description: 'If everyone still has energy, go to Train Night Market Ratchada',
+            vi_description: 'Nếu mọi người vẫn còn năng lượng, đi đến Train Night Market Ratchada',
+            link: 'https://maps.app.goo.gl/Ndyp9KAPvzQ33FNM7',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '22:00-22:30',
+            en_description: 'Heading back to hotel for Day 4',
+            vi_description: 'Quay lại khách sạn cho Ngày 4',
+            link: null,
             hasAlternatives: false,
             alternatives: []
         }
