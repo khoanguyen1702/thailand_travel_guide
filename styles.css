@@ -193,6 +193,7 @@ body::before {
 .day-num {
     font-size: 2rem;
     line-height: 1;
+    color: black;
 }
 
 .day-label {
@@ -204,7 +205,7 @@ body::before {
 
 .day-date {
     font-size: 0.75rem;
-    color: var(--dark-text);
+    color: white;
     margin-top: 6px;
     font-weight: 600;
     white-space: nowrap;
