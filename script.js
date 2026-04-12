@@ -326,12 +326,14 @@ function createActivityCard(activity, day, index) {
                 ${activity.link ? `<a href="${activity.link}" target="_blank" class="activity-link">🔗 View Location</a>` : ''}
             </div>
             <div class="activity-status">
+                ${activity.hasAlternatives ? `
                 <div class="status-button">
                     <button class="btn-status btn-going ${activeGoing}" onclick="setActivityStatus(${day}, ${index}, true)" title="Going">
                         ✓
                     </button>
-                    ${activity.hasAlternatives ? `<button class="btn-status btn-not-going ${activeNotGoing}" onclick="setActivityStatus(${day}, ${index}, false)" title="Not Going">✕</button>` : ''}
+                    <button class="btn-status btn-not-going ${activeNotGoing}" onclick="setActivityStatus(${day}, ${index}, false)" title="Not Going">✕</button>
                 </div>
+                ` : ''}
                 ${alternativesHTML}
             </div>
         </div>

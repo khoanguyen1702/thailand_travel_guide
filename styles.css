@@ -183,12 +183,12 @@ body::before {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-.day-nav-btn.day-1 { background: linear-gradient(135deg, #D97860 0%, #E8957E 100%); }
-.day-nav-btn.day-2 { background: linear-gradient(135deg, #7A9E7F 0%, #8FAF8F 100%); }
-.day-nav-btn.day-3 { background: linear-gradient(135deg, #5B7D6B 0%, #7A9E7F 100%); }
-.day-nav-btn.day-4 { background: linear-gradient(135deg, #E8D25F 0%, #F0E07F 100%); }
-.day-nav-btn.day-5 { background: linear-gradient(135deg, #8B7355 0%, #A89370 100%); }
-.day-nav-btn.day-6 { background: linear-gradient(135deg, #C9A875 0%, #D9B890 100%); }
+.day-nav-btn.day-1 { background: #FFD566; }
+.day-nav-btn.day-2 { background: #FFD566; }
+.day-nav-btn.day-3 { background: #FFD566; }
+.day-nav-btn.day-4 { background: #FFD566; }
+.day-nav-btn.day-5 { background: #FFD566; }
+.day-nav-btn.day-6 { background: #FFD566; }
 
 .day-num {
     font-size: 2rem;
