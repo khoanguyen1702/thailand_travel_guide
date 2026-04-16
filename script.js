@@ -245,8 +245,8 @@ const dayActivities = {
         },
         {
             time: '18:00',
-            en_description: 'Heading to China Town - Eating options: Guay Jub Ouan Pochana (rolling noodle Kway Chap), Traditional Fish Soup, Grill Squid Spicy Sauce, or anything you want',
-            vi_description: 'Đi đến China Town - Lựa chọn ăn uống: Guay Jub Ouan Pochana (mì cuộn Kway Chap), Canh Cá Truyền Thống, Mực Nướng Nước Sốt Cay, hoặc bất cứ thứ gì bạn muốn',
+            en_description: 'Heading to China Town to explore and eating',
+            vi_description: 'Đi đến China Town để khám phá và ăn uống',
             link: 'https://maps.app.goo.gl/npffHayud8rwgF1EA',
             hasAlternatives: true,
             alternatives: [
