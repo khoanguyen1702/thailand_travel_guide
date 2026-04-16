@@ -223,9 +223,9 @@ const dayActivities = {
         },
         {
             time: '15:00',
-            en_description: 'Start exploring Talad Noi (Old Town)',
-            vi_description: 'Bắt đầu khám phá Talad Noi (Thị trấn Cũ)',
-            link: 'https://maps.app.goo.gl/XkyW9VxHYywb63CM6',
+            en_description: 'Going to Chatuchak Weekend Market: Explore, Shopping and Massage here',
+            vi_description: 'Đi đến Chợ Cuối Tuần Chatuchak: Khám Phá, Mua Sắm và Massage ở đây',
+            link: 'https://maps.app.goo.gl/KwMEekgiLjE1m65N7',
             hasAlternatives: false,
             alternatives: []
         },
