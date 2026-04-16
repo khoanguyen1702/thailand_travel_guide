@@ -286,25 +286,104 @@ const dayActivities = {
     ],
     4: [
         {
-            time: '07:30',
-            en_description: 'Get to Bang Sue Junction Station to take train to Ayutthaya. Train departs at 08:45, arrives at Ayutthaya Station in ~45 minutes',
-            vi_description: 'Đến Bang Sue Junction Station để lên tàu đi Ayutthaya. Tàu khởi hành lúc 08:45, tới Ayutthaya Station trong ~45 phút',
-            link: 'https://maps.app.goo.gl/cbsemE587sMuTZzj6',
-            hasAlternatives: false,
-            alternatives: []
-        },
-        {
-            time: '10:00',
-            en_description: 'Rent Motorbike at the station. Remember to refill gas and return bike before 18:00',
-            vi_description: 'Thuê Xe Máy tại trạm. Nhớ đổ xăng và trả xe trước 18:00',
-            link: 'https://maps.app.goo.gl/bRzFrERm6gGiVJfc6',
-            hasAlternatives: false,
-            alternatives: []
-        },
-        {
             time: '10:20',
-            en_description: 'Head to Panids restaurant',
-            vi_description: 'Đi đến nhà hàng Panids',
+            en_description: 'Going to Wat Yai Chai to perform the prayer ritual',
+            vi_description: 'Đi đến Wat Yai Chai để thực hiện nghi thức cầu nguyện',
+            link: 'https://maps.app.goo.gl/nktwP24UXBtZ1KnQ7',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '12:00',
+            en_description: 'Heading to บะหมี่ก้วง to enjoy Duck Rice and Noodles',
+            vi_description: 'Đi đến บะหมี่ก้วง để ăn Cơm Vịt và Mì',
+            link: 'https://maps.app.goo.gl/paF9tm4LHnT3Kjvo6',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '13:30',
+            en_description: 'Going to Wat Phra Ram',
+            vi_description: 'Đi đến Wat Phra Ram',
+            link: 'https://maps.app.goo.gl/h8moftDKG8rv8bM1A',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '14:30',
+            en_description: 'Walking to Wat Mahathat to explore and admire the magnificent Reclining Buddha statue embedded in the tree roots',
+            vi_description: 'Đi bộ đến Wat Mahathat để khám phá và ngưỡng mộ pho tượng Phật nằm tuyệt đẹp nhúng trong rễ cây',
+            link: 'https://maps.app.goo.gl/ucZkh22ykAd4zSQX7',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '15:30',
+            en_description: 'Rest at Cafe Amazon opposite the Temple',
+            vi_description: 'Nghỉ ngơi tại Cafe Amazon đối diện với Chùa',
+            link: 'https://maps.app.goo.gl/yk9XcdAJbRPcrrqV8',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '16:10',
+            en_description: 'Moving to Wat Chaiwatthanaram to take pictures. (Traditional costumes available for rent)',
+            vi_description: 'Đi đến Wat Chaiwatthanaram để chụp ảnh. (Áo truyền thống có sẵn cho thuê)',
+            link: 'https://maps.app.goo.gl/iLLTGgxfatBxfTXg9',
+            hasAlternatives: true,
+            alternatives: [
+                {
+                    en_name: 'Mayura\'s House',
+                    vi_name: 'Nhà Mayura',
+                    en_description: 'If the group decides not to go inside, visit Mayura\'s House to enjoy coffee and their famous ice cream',
+                    vi_description: 'Nếu nhóm quyết định không vào trong, hãy thăm Nhà Mayura để thưởng thức cà phê và kem nổi tiếng của họ',
+                    link: 'https://maps.app.goo.gl/kg8mYCq9zcYCqt7n6'
+                },
+                {
+                    en_name: 'Local Seafood Market',
+                    vi_name: 'Chợ Hải Sản Địa Phương',
+                    en_description: 'Explore the Local Seafood Market to browse and enjoy fresh local seafood directly at the market',
+                    vi_description: 'Khám phá Chợ Hải Sản Địa Phương để mua sắm và thưởng thức hải sản tươi sống ngay tại chợ',
+                    link: 'https://maps.app.goo.gl/6ZBqHpbRtiJXcZmR9'
+                }
+            ]
+        },
+        {
+            time: '17:30',
+            en_description: 'Return the bikes and head back to Bangkok',
+            vi_description: 'Trả xe và quay lại Bangkok',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '18:00',
+            en_description: 'Train departs back to Bangkok; arrive at 19:00',
+            vi_description: 'Tàu khởi hành quay lại Bangkok; tới lúc 19:00',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '19:00',
+            en_description: 'Head back to the hotel for a quick rest and shower if needed',
+            vi_description: 'Quay lại khách sạn để nghỉ ngơi nhanh và tắm nếu cần',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '20:00',
+            en_description: 'Gather again to go to Banthat Thong to enjoy Mama Noodle at Baan Kook Kai and explore the many street food options here, including famous egg tarts and Dubai chocolate',
+            vi_description: 'Tập hợp lại để đi tới Banthat Thong để thưởng thức Mì Mama tại Baan Kook Kai và khám phá nhiều lựa chọn thức ăn đường phố ở đây, bao gồm bánh trứng nổi tiếng và socola Dubai',
+            link: 'https://maps.app.goo.gl/BRUhZRxYRo6fA6Cp8',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '22:30',
+            en_description: 'Head back to the hotel and rest for Day 5',
+            vi_description: 'Quay lại khách sạn và nghỉ ngơi cho Ngày 5',
             link: null,
             hasAlternatives: false,
             alternatives: []
