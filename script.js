@@ -405,7 +405,87 @@ const dayActivities = {
             alternatives: []
         }
     ],
-    5: [],
+    5: [
+        {
+            time: '8:30',
+            en_description: 'Have breakfast - Choose one option',
+            vi_description: 'Ăn sáng - Chọn một option',
+            link: null,
+            hasAlternatives: true,
+            alternatives: [
+                {
+                    en_name: 'Chicken Rice Go-Ang',
+                    vi_name: 'Cơm Gà Go-Ang',
+                    en_description: 'Enjoy famous Chicken Rice at Go-Ang',
+                    vi_description: 'Thưởng thức Cơm Gà nổi tiếng tại Go-Ang',
+                    link: 'https://maps.app.goo.gl/JW6AcPVkFLco8A4ZA'
+                },
+                {
+                    en_name: 'Trok Mor Market',
+                    vi_name: 'Trok Mor Market',
+                    en_description: 'Local market with lots of food options',
+                    vi_description: 'Chợ địa phương với nhiều lựa chọn thức ăn',
+                    link: 'https://maps.app.goo.gl/RB5JtApYdDGbFrR76'
+                }
+            ]
+        },
+        {
+            time: '10:00',
+            en_description: 'Going to BigC to explore and shop for souvenirs to take back to Vietnam',
+            vi_description: 'Đi đến BigC để khám phá và mua sắm quà tặng mang về Việt Nam',
+            link: 'https://maps.app.goo.gl/tY3JCKK6VunhyLLP6',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '12:00',
+            en_description: 'Having lunch at the most famous Pad Thai restaurant - Thipsamai',
+            vi_description: 'Ăn trưa tại nhà hàng Pad Thai nổi tiếng nhất - Thipsamai',
+            link: 'https://maps.app.goo.gl/XJFjHEyRR3WcaFVK7',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '13:00',
+            en_description: 'Return to the hotel to rest',
+            vi_description: 'Quay lại khách sạn để nghỉ ngơi',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '15:00',
+            en_description: 'Heading to Central Park Bangkok - the newest mall with natural open spaces',
+            vi_description: 'Đi đến Central Park Bangkok - trung tâm mua sắm mới nhất với không gian mở thiên nhiên',
+            link: 'https://maps.app.goo.gl/AHpLDSt9TEYTPvvK8',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '17:00',
+            en_description: 'Gathering and heading to Asiatique The Riverfront',
+            vi_description: 'Tập hợp lại và đi đến Asiatique The Riverfront',
+            link: 'https://maps.app.goo.gl/dG162ric8kfkE4429',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '17:30',
+            en_description: 'Heading to the famous local buffet - Suki Teenoi',
+            vi_description: 'Đi đến nhà hàng lẩu địa phương nổi tiếng - Suki Teenoi',
+            link: 'https://maps.app.goo.gl/2rFfqvJZMwBLcubx5',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '19:00',
+            en_description: 'Exploring and shopping at BigC next to Suki Teenoi and at JobbFair Night Market',
+            vi_description: 'Khám phá và mua sắm tại BigC bên cạnh Suki Teenoi và tại JobbFair Night Market',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        }
+    ],
     6: []
 };
 
