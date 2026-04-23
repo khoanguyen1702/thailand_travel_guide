@@ -834,6 +834,7 @@ function closePaymentCalculator() {
 function addPaymentTransaction() {
     const payer = document.getElementById('payer-select').value.trim();
     const amount = parseFloat(document.getElementById('amount-paid-new').value) || 0;
+    const note = document.getElementById('payment-note').value.trim();
     
     // Get split selections
     const splitWith = [];
@@ -857,12 +858,14 @@ function addPaymentTransaction() {
         payer: payer,
         amount: amount,
         splitWith: splitWith,
+        note: note,
         timestamp: new Date().toLocaleString('vi-VN')
     });
     
     // Clear inputs
     document.getElementById('payer-select').value = '';
     document.getElementById('amount-paid-new').value = '';
+    document.getElementById('payment-note').value = '';
     ['Ben', 'Sang', 'Pha', 'Harry', 'Phong', 'Vien'].forEach(name => {
         document.getElementById('split-' + name).checked = false;
     });
@@ -942,16 +945,18 @@ function updateSettlementDisplay() {
         transactions.forEach((transaction, idx) => {
             const splitNames = transaction.splitWith.join(', ');
             const perPerson = (transaction.amount / transaction.splitWith.length).toFixed(0);
+            const noteDisplay = transaction.note ? `<p style="margin-top: 8px; padding: 8px; background: #fff9e6; border-radius: 4px; border-left: 3px solid #ffc107; font-size: 0.9rem;"><strong>📝 Note:</strong> ${transaction.note}</p>` : '';
             historyHTML += `
                 <div style="background: var(--light-cream); padding: 12px; border-radius: 6px; margin-bottom: 8px; border-left: 4px solid var(--sage-green);">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                         <div style="flex: 1;">
                             <strong style="color: var(--coral);">${transaction.payer}</strong> paid 
                             <strong>${transaction.amount.toLocaleString('vi-VN')} ₫</strong> 
                             for ${transaction.splitWith.length} people (${perPerson} ₫ each)
                             <br><small style="color: #666;">Split with: ${splitNames}</small>
+                            ${noteDisplay}
                         </div>
-                        <button onclick="deletePaymentTransaction(${idx})" style="background: var(--coral); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">✕ Remove</button>
+                        <button onclick="deletePaymentTransaction(${idx})" style="background: var(--coral); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; white-space: nowrap; margin-left: 10px;">✕ Remove</button>
                     </div>
                 </div>
             `;
