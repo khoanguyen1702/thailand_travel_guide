@@ -77,42 +77,53 @@
 
             <!-- Payment Calculator Modal -->
             <div id="payment-modal" class="modal" style="display: none;">
-                <div class="modal-content">
+                <div class="modal-content payment-modal-custom">
                     <span class="close" onclick="closePaymentCalculator()">&times;</span>
                     <h2 data-en="Payment Calculator" data-vi="Tính Toán Chi Phí">Payment Calculator</h2>
                     
-                    <div class="payment-inputs">
+                    <div class="payment-inputs-new">
                         <div class="input-group">
-                            <label data-en="Payer Name:" data-vi="Tên Người Chi Tiền:">Payer Name:</label>
-                            <input type="text" id="payer-name" placeholder="Enter name">
+                            <label data-en="Payer:" data-vi="Người Chi Tiền:">Payer:</label>
+                            <select id="payer-select" class="payer-dropdown">
+                                <option value="">-- Select --</option>
+                                <option value="Ben">Ben</option>
+                                <option value="Sang">Sang</option>
+                                <option value="Pha">Pha</option>
+                                <option value="Harry">Harry</option>
+                                <option value="Phong">Phong</option>
+                                <option value="Vien">Vien</option>
+                            </select>
                         </div>
+
                         <div class="input-group">
                             <label data-en="Amount Paid:" data-vi="Số Tiền Đã Chi:">Amount Paid:</label>
-                            <input type="number" id="amount-paid" placeholder="0" min="0">
+                            <input type="number" id="amount-paid-new" placeholder="0" min="0">
                         </div>
+
                         <div class="input-group">
-                            <label data-en="Total Users:" data-vi="Tổng Số Người:">Total Users:</label>
-                            <input type="number" id="total-users" placeholder="0" min="1" value="1">
+                            <label data-en="Split with:" data-vi="Chia với:">Split with:</label>
+                            <div class="split-checkboxes">
+                                <div class="checkbox-item"><input type="checkbox" id="split-Ben" value="Ben"> <label for="split-Ben">Ben</label></div>
+                                <div class="checkbox-item"><input type="checkbox" id="split-Sang" value="Sang"> <label for="split-Sang">Sang</label></div>
+                                <div class="checkbox-item"><input type="checkbox" id="split-Pha" value="Pha"> <label for="split-Pha">Pha</label></div>
+                                <div class="checkbox-item"><input type="checkbox" id="split-Harry" value="Harry"> <label for="split-Harry">Harry</label></div>
+                                <div class="checkbox-item"><input type="checkbox" id="split-Phong" value="Phong"> <label for="split-Phong">Phong</label></div>
+                                <div class="checkbox-item"><input type="checkbox" id="split-Vien" value="Vien"> <label for="split-Vien">Vien</label></div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="payment-results">
-                        <div class="result-row">
-                            <span data-en="Per Person:" data-vi="Trên Mỗi Người:">Per Person:</span>
-                            <span id="per-person">0 ₫</span>
-                        </div>
-                        <div class="result-row">
-                            <span data-en="For 2 People:" data-vi="Cho 2 Người:">For 2 People:</span>
-                            <span id="for-two">0 ₫</span>
-                        </div>
+                    <button onclick="addPaymentTransaction()" style="width: 100%; background: var(--sage-green); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600; margin: 15px 0;">➕ Add</button>
+
+                    <!-- Settlement Table -->
+                    <div id="settlement-table" style="margin-top: 20px;">
+                        <!-- Will be populated by JS -->
                     </div>
 
-                    <div style="display: flex; gap: 10px; margin: 20px 0;">
-                        <button onclick="addPaymentEntry()" style="flex: 1; background: var(--sage-green); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600;">➕ Add Payment</button>
-                        <button onclick="clearAllPayments()" style="flex: 1; background: var(--coral); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: 600;">🗑️ Clear</button>
+                    <!-- Transaction History -->
+                    <div id="transaction-history" style="margin-top: 20px; border-top: 2px solid var(--sage-green); padding-top: 15px;">
+                        <!-- Will be populated by JS -->
                     </div>
-
-                    <div class="payment-history" id="payment-history"></div>
                 </div>
             </div>
 

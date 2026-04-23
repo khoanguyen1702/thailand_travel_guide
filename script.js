@@ -817,33 +817,13 @@ function selectAlternative(day, index, altIndex) {
 
 // Payment Calculator
 function setupPaymentCalculator() {
-    const payerInput = document.getElementById('payer-name');
-    const amountInput = document.getElementById('amount-paid');
-    const usersInput = document.getElementById('total-users');
-    
-    [payerInput, amountInput, usersInput].forEach(input => {
-        if (input) {
-            input.addEventListener('change', calculatePayment);
-            input.addEventListener('input', calculatePayment);
-        }
-    });
-}
-
-function calculatePayment() {
-    const amount = parseFloat(document.getElementById('amount-paid').value) || 0;
-    const users = parseInt(document.getElementById('total-users').value) || 1;
-    
-    const perPerson = users > 0 ? (amount / users).toLocaleString('vi-VN') : 0;
-    const forTwo = users > 0 ? ((amount / users) * 2).toLocaleString('vi-VN') : 0;
-    
-    document.getElementById('per-person').textContent = perPerson + ' ₫';
-    document.getElementById('for-two').textContent = forTwo + ' ₫';
+    // Removed old setup - new system doesn't need input listeners
 }
 
 function openPaymentCalculator() {
     const modal = document.getElementById('payment-modal');
     modal.style.display = 'flex';
-    updatePaymentHistory();
+    updateSettlementDisplay();
 }
 
 function closePaymentCalculator() {
@@ -851,13 +831,20 @@ function closePaymentCalculator() {
     modal.style.display = 'none';
 }
 
-function addPaymentEntry() {
-    const payer = document.getElementById('payer-name').value.trim();
-    const amount = parseFloat(document.getElementById('amount-paid').value) || 0;
-    const users = parseInt(document.getElementById('total-users').value) || 1;
+function addPaymentTransaction() {
+    const payer = document.getElementById('payer-select').value.trim();
+    const amount = parseFloat(document.getElementById('amount-paid-new').value) || 0;
     
-    if (!payer || amount === 0) {
-        alert('Please fill in payer name and amount');
+    // Get split selections
+    const splitWith = [];
+    ['Ben', 'Sang', 'Pha', 'Harry', 'Phong', 'Vien'].forEach(name => {
+        if (document.getElementById('split-' + name).checked) {
+            splitWith.push(name);
+        }
+    });
+    
+    if (!payer || amount === 0 || splitWith.length === 0) {
+        alert('Please fill in payer, amount, and select at least one person to split with');
         return;
     }
     
@@ -869,69 +856,116 @@ function addPaymentEntry() {
     appData.paymentData[day].push({
         payer: payer,
         amount: amount,
-        users: users,
-        perPerson: (amount / users).toFixed(0),
+        splitWith: splitWith,
         timestamp: new Date().toLocaleString('vi-VN')
     });
     
     // Clear inputs
-    document.getElementById('payer-name').value = '';
-    document.getElementById('amount-paid').value = '';
-    document.getElementById('total-users').value = '1';
+    document.getElementById('payer-select').value = '';
+    document.getElementById('amount-paid-new').value = '';
+    ['Ben', 'Sang', 'Pha', 'Harry', 'Phong', 'Vien'].forEach(name => {
+        document.getElementById('split-' + name).checked = false;
+    });
     
-    updatePaymentHistory();
+    updateSettlementDisplay();
     saveAppData();
 }
 
-function updatePaymentHistory() {
+function calculateSettlement() {
     const day = appData.currentDay;
-    const payments = appData.paymentData[day] || [];
-    const container = document.getElementById('payment-history');
+    const transactions = appData.paymentData[day] || [];
     
-    if (payments.length === 0) {
-        container.innerHTML = '';
-        return;
-    }
+    // Initialize balances (positive = owed money/credit, negative = owes money/debt)
+    const balances = {
+        'Ben': 0,
+        'Sang': 0,
+        'Pha': 0,
+        'Harry': 0,
+        'Phong': 0,
+        'Vien': 0
+    };
     
-    let totalAmount = 0;
-    payments.forEach(p => {
-        totalAmount += (typeof p.amount === 'string' ? parseFloat(p.amount) : p.amount);
+    // Calculate balances
+    transactions.forEach(transaction => {
+        const payer = transaction.payer;
+        const amount = transaction.amount;
+        const splitWith = transaction.splitWith;
+        const perPerson = amount / splitWith.length;
+        
+        // Payer gets credited for paying
+        balances[payer] -= (amount - perPerson); // They paid the full amount but owe their share
+        
+        // Each person in splitWith owes their share
+        splitWith.forEach(person => {
+            if (person !== payer) {
+                balances[person] += perPerson;
+            }
+        });
     });
     
-    let html = '<div style="margin-top: 20px; border-top: 2px solid var(--sage-green); padding-top: 15px;"><h3 style="color: var(--dark-green); margin-bottom: 12px;">💳 Payment History</h3>';
-    
-    payments.forEach((payment, idx) => {
-        const amt = typeof payment.amount === 'string' ? parseFloat(payment.amount) : payment.amount;
-        html += `
-            <div style="background: var(--light-cream); padding: 10px; border-radius: 6px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                <div style="flex: 1;">
-                    <strong>${payment.payer}</strong> - ${amt.toLocaleString('vi-VN')} ₫ ÷ ${payment.users} = <span style="color: var(--coral);">${(amt / payment.users).toFixed(0)} ₫</span>
-                </div>
-                <button onclick="deletePaymentEntry(${idx})" style="background: var(--coral); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Delete</button>
-            </div>
-        `;
-    });
-    
-    html += `<div style="background: var(--sage-green); color: white; padding: 15px; border-radius: 6px; margin-top: 12px; font-weight: 600; text-align: center; font-size: 1.2rem;">💰 Total: ${totalAmount.toLocaleString('vi-VN')} ₫</div>`;
-    html += '</div>';
-    
-    container.innerHTML = html;
+    return balances;
 }
 
-function deletePaymentEntry(idx) {
+function updateSettlementDisplay() {
+    const balances = calculateSettlement();
+    const day = appData.currentDay;
+    const transactions = appData.paymentData[day] || [];
+    
+    // Build settlement table
+    let tableHTML = '<h3 style="color: var(--dark-green); margin-bottom: 15px; margin-top: 0;">📊 Settlement</h3>';
+    tableHTML += '<table style="width: 100%; border-collapse: collapse;">';
+    tableHTML += '<tr style="background: var(--dark-green); color: white;"><th style="padding: 10px; text-align: left;">Member</th><th style="padding: 10px; text-align: right;">Amount</th></tr>';
+    
+    Object.keys(balances).forEach(member => {
+        const balance = balances[member];
+        const isCredit = balance < 0; // Negative balance means they get money back
+        const absBalance = Math.abs(balance);
+        const bgColor = isCredit ? '#d4edda' : '#f8d7da'; // Light green for credit, light red for debt
+        const textColor = isCredit ? '#155724' : '#721c24'; // Dark green for credit, dark red for debt
+        const sign = isCredit ? '🟢' : '🔴';
+        
+        tableHTML += `<tr style="border-bottom: 1px solid #eee; background: ${bgColor};">
+            <td style="padding: 10px;">${sign} ${member}</td>
+            <td style="padding: 10px; text-align: right; color: ${textColor}; font-weight: 600;">${isCredit ? '-' : '+'} ${absBalance.toLocaleString('vi-VN')} ₫</td>
+        </tr>`;
+    });
+    
+    tableHTML += '</table>';
+    document.getElementById('settlement-table').innerHTML = tableHTML;
+    
+    // Build transaction history
+    let historyHTML = '<h3 style="color: var(--dark-green); margin-bottom: 12px;">📜 Transaction History</h3>';
+    
+    if (transactions.length === 0) {
+        historyHTML += '<p style="color: #999; text-align: center;">No transactions yet</p>';
+    } else {
+        transactions.forEach((transaction, idx) => {
+            const splitNames = transaction.splitWith.join(', ');
+            const perPerson = (transaction.amount / transaction.splitWith.length).toFixed(0);
+            historyHTML += `
+                <div style="background: var(--light-cream); padding: 12px; border-radius: 6px; margin-bottom: 8px; border-left: 4px solid var(--sage-green);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex: 1;">
+                            <strong style="color: var(--coral);">${transaction.payer}</strong> paid 
+                            <strong>${transaction.amount.toLocaleString('vi-VN')} ₫</strong> 
+                            for ${transaction.splitWith.length} people (${perPerson} ₫ each)
+                            <br><small style="color: #666;">Split with: ${splitNames}</small>
+                        </div>
+                        <button onclick="deletePaymentTransaction(${idx})" style="background: var(--coral); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">✕ Remove</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    
+    document.getElementById('transaction-history').innerHTML = historyHTML;
+}
+
+function deletePaymentTransaction(idx) {
     const day = appData.currentDay;
     if (appData.paymentData[day]) {
         appData.paymentData[day].splice(idx, 1);
-        updatePaymentHistory();
-        saveAppData();
-    }
-}
-
-function clearAllPayments() {
-    if (confirm('Are you sure you want to clear all payments?')) {
-        const day = appData.currentDay;
-        appData.paymentData[day] = [];
-        updatePaymentHistory();
+        updateSettlementDisplay();
         saveAppData();
     }
 }

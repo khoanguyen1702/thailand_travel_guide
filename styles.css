@@ -547,6 +547,98 @@ body::before {
     }
 }
 
+/* Payment Calculator Styles */
+.payment-modal-custom {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.payment-inputs-new {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.payment-inputs-new .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.payment-inputs-new label {
+    font-weight: 600;
+    color: var(--dark-text);
+    font-size: 0.95rem;
+}
+
+.payer-dropdown {
+    padding: 10px 12px;
+    border: 2px solid var(--sage-green);
+    border-radius: 6px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.payer-dropdown:hover,
+.payer-dropdown:focus {
+    border-color: var(--dark-green);
+    box-shadow: 0 0 8px rgba(122, 158, 127, 0.3);
+    outline: none;
+}
+
+#amount-paid-new {
+    padding: 10px 12px;
+    border: 2px solid var(--sage-green);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+#amount-paid-new:hover,
+#amount-paid-new:focus {
+    border-color: var(--dark-green);
+    box-shadow: 0 0 8px rgba(122, 158, 127, 0.3);
+    outline: none;
+}
+
+.split-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px;
+    background: #F9F9F9;
+    border-radius: 6px;
+    border: 1px solid #E0E0E0;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--sage-green);
+}
+
+.checkbox-item label {
+    cursor: pointer;
+    margin: 0;
+    font-weight: normal;
+}
+
+@media (max-width: 768px) {
+    .split-checkboxes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 .alternative-option {
     padding: 12px 15px;
     background: white;
