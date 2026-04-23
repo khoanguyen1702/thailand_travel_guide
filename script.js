@@ -479,8 +479,24 @@ const dayActivities = {
         },
         {
             time: '19:00',
-            en_description: 'Exploring and shopping at BigC next to Suki Teenoi and at JobbFair Night Market',
-            vi_description: 'Khám phá và mua sắm tại BigC bên cạnh Suki Teenoi và tại JobbFair Night Market',
+            en_description: 'Exploring and buying stuff from Jodd Fair Night Market (same place as restaurant)',
+            vi_description: 'Khám phá và mua sắm tại Jodd Fair Night Market (cùng địa điểm với nhà hàng)',
+            link: 'https://maps.app.goo.gl/3MPg59HxTxhwnSsp7',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '20:00',
+            en_description: 'If still have time and energy, heading to EmSphere',
+            vi_description: 'Nếu vẫn còn thời gian và năng lượng, đi đến EmSphere',
+            link: 'https://maps.app.goo.gl/Zee8giBiffnJhzV17',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '22:00',
+            en_description: 'Heading back to hotel for the last day in Bangkok - Day 6',
+            vi_description: 'Quay lại khách sạn cho ngày cuối cùng ở Bangkok - Ngày 6',
             link: null,
             hasAlternatives: false,
             alternatives: []
