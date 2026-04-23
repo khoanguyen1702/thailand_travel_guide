@@ -409,8 +409,9 @@ const dayActivities = {
         {
             time: '8:30',
             en_description: 'Have breakfast - Choose one option',
-            vi_description: 'Ăn sáng - Chọn một option',
+            vi_description: 'Ăn sáng - Chọn một lựa chọn',
             link: null,
+            useDropdown: true,
             hasAlternatives: true,
             alternatives: [
                 {
@@ -502,7 +503,79 @@ const dayActivities = {
             alternatives: []
         }
     ],
-    6: []
+    6: [
+        {
+            time: '8:00',
+            en_description: 'Have breakfast - Choose one option',
+            vi_description: 'Ăn sáng - Chọn một lựa chọn',
+            link: null,
+            useDropdown: true,
+            hasAlternatives: true,
+            alternatives: [
+                {
+                    en_name: 'On Lok Yun - Traditional Hong Kong Breakfast',
+                    vi_name: 'On Lok Yun - Bữa Sáng Truyền Thống Hồng Kông',
+                    en_description: 'Traditional Hong Kong style breakfast at On Lok Yun',
+                    vi_description: 'Bữa sáng kiểu truyền thống Hồng Kông tại On Lok Yun',
+                    link: 'https://maps.app.goo.gl/WpnVTF6RfBe8BnuV8'
+                },
+                {
+                    en_name: 'Come Back on Boat Noodle',
+                    vi_name: 'Come Back on Boat Noodle',
+                    en_description: 'Famous Boat Noodle in Victory Monument',
+                    vi_description: 'Bánh mì nổi tiếng trong Boat Noodle tại Victory Monument',
+                    link: 'https://maps.app.goo.gl/7bk5iE4CrPNtVDUo8'
+                },
+                {
+                    en_name: 'Jok Prince - Traditional Meatball Congee',
+                    vi_name: 'Jok Prince - Cháo Thịt Viên Truyền Thống',
+                    en_description: 'Traditional meatball congee at Jok Prince',
+                    vi_description: 'Cháo thịt viên truyền thống tại Jok Prince',
+                    link: 'https://maps.app.goo.gl/HrAJbpzWESBL22fZA'
+                }
+            ]
+        },
+        {
+            time: '10:00',
+            en_description: 'Go back to the malls - Choose one option',
+            vi_description: 'Quay lại các trung tâm mua sắm - Chọn một lựa chọn',
+            link: null,
+            useDropdown: true,
+            hasAlternatives: true,
+            alternatives: [
+                {
+                    en_name: 'Central World',
+                    vi_name: 'Central World',
+                    en_description: 'Shop at Central World mall',
+                    vi_description: 'Mua sắm tại trung tâm mua sắm Central World',
+                    link: 'https://maps.app.goo.gl/neQDHAWxwEoiuYubA'
+                },
+                {
+                    en_name: 'One Bangkok',
+                    vi_name: 'One Bangkok',
+                    en_description: 'Shop at One Bangkok mall',
+                    vi_description: 'Mua sắm tại trung tâm mua sắm One Bangkok',
+                    link: 'https://maps.app.goo.gl/ce4JfbMBQXbBjtCA8'
+                }
+            ]
+        },
+        {
+            time: '12:00',
+            en_description: 'Head back to the hotel to collect luggage and go straight to the airport',
+            vi_description: 'Quay lại khách sạn để lấy hành lý và đi thẳng đến sân bay',
+            link: 'https://maps.app.goo.gl/aRByGuq8kRRYZEpk7',
+            hasAlternatives: false,
+            alternatives: []
+        },
+        {
+            time: '13:00',
+            en_description: 'Check-in and shopping at the airport until boarding time',
+            vi_description: 'Làm thủ tục check-in và mua sắm tại sân bay cho đến lúc lên máy bay',
+            link: null,
+            hasAlternatives: false,
+            alternatives: []
+        }
+    ]
 };
 
 // Data storage
@@ -607,7 +680,25 @@ function updateActivityDisplay() {
         return;
     }
     
-    container.innerHTML = activities.map((activity, index) => createActivityCard(activity, day, index)).join('');
+    let html = activities.map((activity, index) => createActivityCard(activity, day, index)).join('');
+    
+    // Add thank you message for Day 6
+    if (day === 6) {
+        const lang = appData.currentLang;
+        const messageEn = 'Thank you for choosing us for your trip, hope you enjoyed and safe flight back home!';
+        const messageVi = 'Cảm ơn bạn đã chọn chúng tôi cho chuyến du lịch của bạn, hy vọng bạn đã tận hưởng và bay an toàn về nhà!';
+        const message = lang === 'en' ? messageEn : messageVi;
+        
+        html += `
+            <div style="text-align: center; margin-top: 40px; padding: 30px; animation: bounce 2s infinite;">
+                <p style="font-size: 24px; color: #d9534f; font-weight: bold; margin: 0;">
+                    ${message}
+                </p>
+            </div>
+        `;
+    }
+    
+    container.innerHTML = html;
 }
 
 function createActivityCard(activity, day, index) {
@@ -620,8 +711,8 @@ function createActivityCard(activity, day, index) {
     const activeGoing = status.going ? 'active' : '';
     const activeNotGoing = !status.going ? 'active' : '';
     
-    // Special dropdown layout for Day 3, 18:00 China Town activity
-    if (day === 3 && activity.time === '18:00' && activity.alternatives.length > 0) {
+    // Special dropdown layout for activities with useDropdown flag or specific hardcoded cases
+    if ((activity.useDropdown || (day === 3 && activity.time === '18:00')) && activity.alternatives.length > 0) {
         const isDropdownOpen = status.dropdownOpen || false;
         const alternativesHTML = `
             <div class="dropdown-list">
@@ -645,7 +736,7 @@ function createActivityCard(activity, day, index) {
                     ${activity.link ? `<a href="${activity.link}" target="_blank" class="activity-link">🔗 View Location</a>` : ''}
                 </div>
                 <div class="activity-status">
-                    <button class="btn-dropdown" onclick="toggleDropdown(${day}, ${index})" title="Show eating options">
+                    <button class="btn-dropdown" onclick="toggleDropdown(${day}, ${index})" title="Show options">
                         ▼ Menu
                     </button>
                 </div>
